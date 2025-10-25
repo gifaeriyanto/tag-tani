@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { KelompokTani } from 'constants/kelompokTani';
-import { WAJO_KECAMATAN, COMMODITIES } from 'constants/kelompokTani';
+import { COMMODITIES, WAJO_KECAMATAN } from 'constants/kelompokTani';
 
 interface KelompokTaniFormProps {
   initialData?: KelompokTani;

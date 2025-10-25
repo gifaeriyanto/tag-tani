@@ -1,0 +1,1 @@
+export { LahanMap } from './LahanMap';

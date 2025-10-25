@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  HomeIcon,
-  UsersIcon,
-  UserCheckIcon,
-  WheatIcon,
   HandHeartIcon,
+  HomeIcon,
+  MapIcon,
+  UserCheckIcon,
+  UsersIcon,
+  WheatIcon,
 } from 'lucide-react';
 
 interface NavItem {
@@ -19,6 +20,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { href: '/', label: 'Dasbor', icon: HomeIcon },
   { href: '/kelompok-tani', label: 'Kelompok Tani', icon: UsersIcon },
+  { href: '/lahan', label: 'Lahan', icon: MapIcon },
   { href: '/penyuluh', label: 'Penyuluh', icon: UserCheckIcon },
   { href: '/komoditi', label: 'Komoditi', icon: WheatIcon },
   { href: '/bantuan-petani', label: 'Bantuan Petani', icon: HandHeartIcon },

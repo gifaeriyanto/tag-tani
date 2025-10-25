@@ -1,0 +1,1 @@
+export { LahanForm } from './LahanForm';
