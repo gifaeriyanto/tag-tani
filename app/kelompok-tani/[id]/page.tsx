@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeftIcon, PencilIcon, UserPlusIcon } from 'lucide-react';
+import { ArrowLeftIcon, PencilIcon, UsersIcon } from 'lucide-react';
 import { Sidebar } from 'components/Sidebar';
 import { Header } from 'components/Header';
 import { KELOMPOK_TANI_LIST } from 'constants/kelompokTani';
@@ -59,11 +59,11 @@ export default function KelompokTaniDetailPage() {
             </div>
             <div className="flex items-center gap-3">
               <Link
-                href={`/kelompok-tani/anggota/create?kelompokId=${id}`}
+                href={`/kelompok-tani/${id}/anggota`}
                 className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
-                <UserPlusIcon className="w-4 h-4" />
-                Tambah Petani
+                <UsersIcon className="w-4 h-4" />
+                Daftar Petani
               </Link>
               <Link
                 href={`/kelompok-tani/${id}/edit`}

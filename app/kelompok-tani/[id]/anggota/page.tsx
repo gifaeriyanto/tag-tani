@@ -1,16 +1,25 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { PlusIcon, SearchIcon } from 'lucide-react';
+import { ArrowLeftIcon, PlusIcon, SearchIcon } from 'lucide-react';
 import { Sidebar } from 'components/Sidebar';
 import { Header } from 'components/Header';
 import { PetaniCard } from 'components/PetaniCard';
 import { PETANI_LIST } from 'constants/petani';
+import { KELOMPOK_TANI_LIST } from 'constants/kelompokTani';
 
 export default function PetaniListPage() {
+  const params = useParams();
+  const router = useRouter();
+  const kelompokTaniId = params.id as string;
+
+  const kelompokTani = KELOMPOK_TANI_LIST.find((kt) => kt.id === kelompokTaniId);
   const [searchQuery, setSearchQuery] = useState('');
-  const [petaniList, setPetaniList] = useState(PETANI_LIST);
+  const [petaniList, setPetaniList] = useState(
+    PETANI_LIST.filter((p) => p.kelompokTaniId === kelompokTaniId)
+  );
 
   const handleDelete = (id: string) => {
     if (confirm('Apakah Anda yakin ingin menghapus petani ini?')) {
@@ -24,8 +33,7 @@ export default function PetaniListPage() {
     const query = searchQuery.toLowerCase();
     return (
       p.name.toLowerCase().includes(query) ||
-      p.nik.toLowerCase().includes(query) ||
-      p.kelompokTaniName.toLowerCase().includes(query)
+      p.nik.toLowerCase().includes(query)
     );
   });
 
@@ -36,22 +44,31 @@ export default function PetaniListPage() {
 
       <main className="ml-[220px] mt-16 p-8">
         {/* Page Header */}
-        <div className="mb-8 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Data Petani
-            </h1>
-            <p className="text-gray-600">
-              Kelola data petani dan informasinya
-            </p>
-          </div>
-          <Link
-            href="/kelompok-tani/anggota/create"
-            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+        <div className="mb-8">
+          <button
+            onClick={() => router.back()}
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4"
           >
-            <PlusIcon className="w-5 h-5" />
-            Tambah Petani
-          </Link>
+            <ArrowLeftIcon className="w-4 h-4" />
+            Kembali
+          </button>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                Daftar Petani
+              </h1>
+              <p className="text-gray-600">
+                {kelompokTani ? kelompokTani.name : 'Kelompok Tani'}
+              </p>
+            </div>
+            <Link
+              href={`/kelompok-tani/${kelompokTaniId}/anggota/create`}
+              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            >
+              <PlusIcon className="w-5 h-5" />
+              Tambah Petani
+            </Link>
+          </div>
         </div>
 
         {/* Search Bar */}
@@ -60,7 +77,7 @@ export default function PetaniListPage() {
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input
               type="text"
-              placeholder="Cari nama, NIK, atau kelompok tani..."
+              placeholder="Cari nama atau NIK..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
@@ -72,7 +89,12 @@ export default function PetaniListPage() {
         {filteredList.length > 0 ? (
           <div className="space-y-3">
             {filteredList.map((petani) => (
-              <PetaniCard key={petani.id} data={petani} onDelete={handleDelete} />
+              <PetaniCard
+                key={petani.id}
+                data={petani}
+                kelompokTaniId={kelompokTaniId}
+                onDelete={handleDelete}
+              />
             ))}
           </div>
         ) : (

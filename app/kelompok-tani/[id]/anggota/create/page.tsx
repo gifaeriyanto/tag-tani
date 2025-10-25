@@ -1,40 +1,15 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { ArrowLeftIcon } from 'lucide-react';
 import { Sidebar } from 'components/Sidebar';
 import { Header } from 'components/Header';
 import { PetaniForm } from 'components/PetaniForm';
-import { PETANI_LIST } from 'constants/petani';
 
-export default function EditPetaniPage() {
+export default function CreatePetaniPage() {
   const params = useParams();
   const router = useRouter();
-  const id = params.id as string;
-
-  const petani = PETANI_LIST.find((p) => p.id === id);
-
-  if (!petani) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Sidebar />
-        <Header />
-
-        <main className="ml-[220px] mt-16 p-8">
-          <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-            <p className="text-gray-500 mb-4">Petani tidak ditemukan</p>
-            <Link
-              href="/kelompok-tani/anggota"
-              className="text-green-600 hover:text-green-700"
-            >
-              Kembali ke Daftar
-            </Link>
-          </div>
-        </main>
-      </div>
-    );
-  }
+  const kelompokTaniId = params.id as string;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -52,15 +27,15 @@ export default function EditPetaniPage() {
             Kembali
           </button>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Edit Petani
+            Tambah Petani
           </h1>
           <p className="text-gray-600">
-            Perbarui informasi petani {petani.name}
+            Isi formulir di bawah untuk menambah petani baru
           </p>
         </div>
 
         {/* Form */}
-        <PetaniForm mode="edit" initialData={petani} />
+        <PetaniForm mode="create" kelompokTaniId={kelompokTaniId} />
       </main>
     </div>
   );

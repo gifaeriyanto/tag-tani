@@ -10,9 +10,10 @@ import { PETANI_LIST } from 'constants/petani';
 export default function PetaniDetailPage() {
   const params = useParams();
   const router = useRouter();
-  const id = params.id as string;
+  const kelompokTaniId = params.id as string;
+  const petaniId = params.petaniId as string;
 
-  const petani = PETANI_LIST.find((p) => p.id === id);
+  const petani = PETANI_LIST.find((p) => p.id === petaniId);
 
   if (!petani) {
     return (
@@ -24,7 +25,7 @@ export default function PetaniDetailPage() {
           <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
             <p className="text-gray-500 mb-4">Petani tidak ditemukan</p>
             <Link
-              href="/kelompok-tani/anggota"
+              href={`/kelompok-tani/${kelompokTaniId}/anggota`}
               className="text-green-600 hover:text-green-700"
             >
               Kembali ke Daftar
@@ -58,7 +59,7 @@ export default function PetaniDetailPage() {
               <p className="text-gray-600">NIK: {petani.nik}</p>
             </div>
             <Link
-              href={`/kelompok-tani/anggota/${id}/edit`}
+              href={`/kelompok-tani/${kelompokTaniId}/anggota/${petaniId}/edit`}
               className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
             >
               <PencilIcon className="w-4 h-4" />

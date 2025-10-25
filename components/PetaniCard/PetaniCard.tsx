@@ -6,10 +6,11 @@ import type { Petani } from 'constants/petani';
 
 interface PetaniCardProps {
   data: Petani;
+  kelompokTaniId: string;
   onDelete?: (id: string) => void;
 }
 
-export function PetaniCard({ data, onDelete }: PetaniCardProps) {
+export function PetaniCard({ data, kelompokTaniId, onDelete }: PetaniCardProps) {
   const handleDelete = () => {
     if (onDelete) {
       onDelete(data.id);
@@ -50,14 +51,14 @@ export function PetaniCard({ data, onDelete }: PetaniCardProps) {
         {/* Right side - Actions */}
         <div className="flex flex-shrink-0 items-center gap-2">
           <Link
-            href={`/kelompok-tani/anggota/${data.id}`}
+            href={`/kelompok-tani/${kelompokTaniId}/anggota/${data.id}`}
             className="rounded-lg p-2 text-blue-600 transition-colors hover:bg-blue-50"
             title="Lihat Detail"
           >
             <EyeIcon className="h-4 w-4" />
           </Link>
           <Link
-            href={`/kelompok-tani/anggota/${data.id}/edit`}
+            href={`/kelompok-tani/${kelompokTaniId}/anggota/${data.id}/edit`}
             className="rounded-lg p-2 text-green-600 transition-colors hover:bg-green-50"
             title="Edit"
           >

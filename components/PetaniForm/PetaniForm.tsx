@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import type { Petani } from 'constants/petani';
 import { GENDER_OPTIONS } from 'constants/petani';
 import { KELOMPOK_TANI_LIST } from 'constants/kelompokTani';
@@ -9,12 +9,11 @@ import { KELOMPOK_TANI_LIST } from 'constants/kelompokTani';
 interface PetaniFormProps {
   initialData?: Petani;
   mode: 'create' | 'edit';
+  kelompokTaniId?: string;
 }
 
-export function PetaniForm({ initialData, mode }: PetaniFormProps) {
+export function PetaniForm({ initialData, mode, kelompokTaniId }: PetaniFormProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const kelompokIdFromQuery = searchParams?.get('kelompokId') || '';
 
   const [formData, setFormData] = useState({
     name: initialData?.name || '',
@@ -23,7 +22,7 @@ export function PetaniForm({ initialData, mode }: PetaniFormProps) {
     gender: initialData?.gender || 'L',
     phone: initialData?.phone || '',
     address: initialData?.address || '',
-    kelompokTaniId: initialData?.kelompokTaniId || kelompokIdFromQuery,
+    kelompokTaniId: initialData?.kelompokTaniId || kelompokTaniId || '',
     landArea: initialData?.landArea || 0,
   });
 
@@ -50,11 +49,21 @@ export function PetaniForm({ initialData, mode }: PetaniFormProps) {
     // TODO: Implement API call to save data
     console.log('Form submitted:', formData);
     // Navigate back to list page
-    router.push('/kelompok-tani/anggota');
+    const ktId = formData.kelompokTaniId || kelompokTaniId;
+    if (ktId) {
+      router.push(`/kelompok-tani/${ktId}/anggota`);
+    } else {
+      router.back();
+    }
   };
 
   const handleCancel = () => {
-    router.push('/kelompok-tani/anggota');
+    const ktId = formData.kelompokTaniId || kelompokTaniId;
+    if (ktId) {
+      router.push(`/kelompok-tani/${ktId}/anggota`);
+    } else {
+      router.back();
+    }
   };
 
   return (
