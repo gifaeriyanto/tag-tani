@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   HomeIcon,
   UsersIcon,
@@ -11,11 +14,10 @@ interface NavItem {
   href: string;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
-  active?: boolean;
 }
 
 const navItems: NavItem[] = [
-  { href: '/', label: 'Dasbor', icon: HomeIcon, active: true },
+  { href: '/', label: 'Dasbor', icon: HomeIcon },
   { href: '/kelompok-tani', label: 'Kelompok Tani', icon: UsersIcon },
   { href: '/penyuluh', label: 'Penyuluh', icon: UserCheckIcon },
   { href: '/komoditi', label: 'Komoditi', icon: WheatIcon },
@@ -23,6 +25,15 @@ const navItems: NavItem[] = [
 ];
 
 export function Sidebar() {
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(href);
+  };
+
   return (
     <aside className="w-[220px] h-screen bg-white border-r border-gray-200 fixed left-0 top-0">
       <div className="p-6">
@@ -34,13 +45,14 @@ export function Sidebar() {
       <nav className="px-3">
         {navItems.map((item) => {
           const Icon = item.icon;
+          const active = isActive(item.href);
           return (
             <Link
               key={item.href}
               href={item.href}
               className={`
                 flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 transition-colors
-                ${item.active
+                ${active
                   ? 'bg-green-50 text-green-600'
                   : 'text-gray-700 hover:bg-gray-50'
                 }
