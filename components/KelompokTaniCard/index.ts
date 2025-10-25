@@ -1,0 +1,1 @@
+export { KelompokTaniCard } from './KelompokTaniCard';
