@@ -1,53 +1,38 @@
-import { Metadata } from 'next';
-import {
-  UsersIcon,
-  UserCheckIcon,
-  WheatIcon,
-  HandHeartIcon,
-} from 'lucide-react';
+'use client';
+
+import { useState } from 'react';
+import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 import { Sidebar } from 'components/Sidebar';
 import { Header } from 'components/Header';
 import { StatCard } from 'components/StatCard';
+import { DateRangeFilter } from 'components/DateRangeFilter';
+import { HorizontalBarChart } from 'components/HorizontalBarChart';
+import {
+  DASHBOARD_STATS,
+  HARVEST_TRENDS_LAST_MONTH,
+  HARVEST_TRENDS_LAST_YEAR,
+} from 'constants/dashboard';
 
-export const metadata: Metadata = {
-  title: 'Dashboard - TagTani',
-};
+type FilterOption = 'last_month' | 'last_year' | 'custom';
 
 export default function Dashboard() {
-  const stats = [
-    {
-      title: 'Total Kelompok Tani',
-      value: 5,
-      subtitle: '5 aktif',
-      icon: UsersIcon,
-      iconBgColor: 'bg-green-50',
-      iconColor: 'text-green-600',
-    },
-    {
-      title: 'Total Penyuluh',
-      value: 8,
-      subtitle: '8 aktif',
-      icon: UserCheckIcon,
-      iconBgColor: 'bg-green-50',
-      iconColor: 'text-green-600',
-    },
-    {
-      title: 'Total Komoditi',
-      value: 12,
-      icon: WheatIcon,
-      iconBgColor: 'bg-green-50',
-      iconColor: 'text-green-600',
-      subtitle: '12 jenis',
-    },
-    {
-      title: 'Bantuan Tersalurkan',
-      value: 24,
-      icon: HandHeartIcon,
-      iconBgColor: 'bg-green-50',
-      iconColor: 'text-green-600',
-      subtitle: 'Bulan ini',
-    },
-  ];
+  const [showAllKecamatan, setShowAllKecamatan] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState<FilterOption>('last_month');
+
+  const handleFilterChange = (
+    option: FilterOption,
+    startDate?: Date,
+    endDate?: Date
+  ) => {
+    setSelectedFilter(option);
+    // TODO: When custom is selected, you can use startDate and endDate to fetch data
+    console.log('Filter changed:', option, startDate, endDate);
+  };
+
+  const harvestTrends =
+    selectedFilter === 'last_year'
+      ? HARVEST_TRENDS_LAST_YEAR
+      : HARVEST_TRENDS_LAST_MONTH;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -64,10 +49,69 @@ export default function Dashboard() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {DASHBOARD_STATS.map((stat) => (
             <StatCard key={stat.title} {...stat} />
           ))}
+        </div>
+
+        {/* Harvest Trends Section */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="mb-6">
+            <div className="flex items-start justify-between mb-4">
+              <h2 className="text-xl font-bold text-gray-900">
+                Trend Panen per Kecamatan
+              </h2>
+              <div className="flex gap-4">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#22c55e]"></div>
+                  <span className="text-xs text-gray-600">Padi</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#eab308]"></div>
+                  <span className="text-xs text-gray-600">Jagung</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#f97316]"></div>
+                  <span className="text-xs text-gray-600">Kedelai</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#ef4444]"></div>
+                  <span className="text-xs text-gray-600">Kacang Tanah</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#84cc16]"></div>
+                  <span className="text-xs text-gray-600">Kacang Hijau</span>
+                </div>
+              </div>
+            </div>
+            <DateRangeFilter onFilterChange={handleFilterChange} />
+          </div>
+
+          <HorizontalBarChart
+            data={showAllKecamatan ? harvestTrends : harvestTrends.slice(0, 5)}
+          />
+
+          {harvestTrends.length > 5 && (
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => setShowAllKecamatan(!showAllKecamatan)}
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700 hover:bg-green-50 rounded-lg transition-colors"
+              >
+                {showAllKecamatan ? (
+                  <>
+                    <ChevronUpIcon className="w-4 h-4" />
+                    Tampilkan Lebih Sedikit
+                  </>
+                ) : (
+                  <>
+                    <ChevronDownIcon className="w-4 h-4" />
+                    Tampilkan Semua ({harvestTrends.length} Kecamatan)
+                  </>
+                )}
+              </button>
+            </div>
+          )}
         </div>
       </main>
     </div>
