@@ -686,6 +686,71 @@ When adding new pages/features:
 
 ---
 
+## Common Mistakes & Lessons Learned
+
+### Component Directory Structure ⚠️
+
+**MISTAKE**: Creating component files directly in `/components/ComponentName.tsx`
+
+```bash
+# ❌ WRONG - This will cause module resolution errors
+components/
+  BantuanPetaniCard.tsx
+  BantuanPetaniForm.tsx
+```
+
+**CORRECT**: Components must be in subdirectories with `index.ts` barrel export
+
+```bash
+# ✅ CORRECT
+components/
+  BantuanPetaniCard/
+    index.ts                 # Export barrel: export { BantuanPetaniCard } from './BantuanPetaniCard'
+    BantuanPetaniCard.tsx
+  BantuanPetaniForm/
+    index.ts                 # Export barrel: export { BantuanPetaniForm } from './BantuanPetaniForm'
+    BantuanPetaniForm.tsx
+```
+
+**Why**: The project uses path aliasing with `jsconfig.json` or `tsconfig.json` that expects component imports like:
+```typescript
+import { BantuanPetaniCard } from 'components/BantuanPetaniCard';  // Requires index.ts
+```
+
+**To Avoid**: When creating a new component:
+1. Create a directory with **exact component name** (e.g., `components/MyComponent/`)
+2. Create the component file inside (e.g., `MyComponent.tsx`)
+3. **Always create `index.ts`** file with barrel export:
+   ```typescript
+   export { MyComponent } from './MyComponent';
+   ```
+
+### Component Placement in Directory Tree
+
+**Why Each Component Gets Its Own Directory**:
+- Allows adding related files (stories, tests) alongside the component
+- Enables proper tree-shaking and code splitting
+- Follows Next.js Enterprise Boilerplate conventions
+- Matches the pattern used by Sidebar, Header, PenyuluhCard, etc.
+
+### Quick Reference for Component Creation
+
+```bash
+# Step 1: Create directory
+mkdir -p components/MyFeature/
+
+# Step 2: Create component file
+touch components/MyFeature/MyFeature.tsx
+
+# Step 3: Create barrel export
+echo "export { MyFeature } from './MyFeature';" > components/MyFeature/index.ts
+
+# Step 4: Use in your pages
+# import { MyFeature } from 'components/MyFeature'; ✅
+```
+
+---
+
 ## Resources
 
 - **Next.js Docs**: https://nextjs.org/docs
