@@ -4,9 +4,9 @@ import { useRouter } from 'next/navigation';
 import { ArrowLeftIcon } from 'lucide-react';
 import { Sidebar } from 'components/Sidebar';
 import { Header } from 'components/Header';
-import { KelompokTaniForm } from 'components/KelompokTaniForm';
+import { KomoditiForm } from 'components/KomoditiForm';
 
-export default function CreateKelompokTaniPage() {
+export default function CreateKomoditiPage() {
   const router = useRouter();
 
   return (
@@ -25,15 +25,15 @@ export default function CreateKelompokTaniPage() {
             Kembali
           </button>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Tambah Kelompok Tani
+            Tambah Komoditi
           </h1>
           <p className="text-gray-600">
-            Isi formulir di bawah untuk menambah kelompok tani baru
+            Isi formulir di bawah untuk menambah komoditi baru
           </p>
         </div>
 
         {/* Form */}
-        <KelompokTaniForm mode="create" />
+        <KomoditiForm mode="create" />
       </main>
     </div>
   );
