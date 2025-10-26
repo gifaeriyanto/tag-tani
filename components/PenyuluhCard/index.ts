@@ -1,0 +1,1 @@
+export { PenyuluhCard } from './PenyuluhCard';
