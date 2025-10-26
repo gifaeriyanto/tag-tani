@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
 import { PlusIcon, SearchIcon } from 'lucide-react';
-import { Sidebar } from 'components/Sidebar';
+import Link from 'next/link';
+import { useState } from 'react';
 import { Header } from 'components/Header';
 import { KomoditiCard } from 'components/KomoditiCard';
+import { Sidebar } from 'components/Sidebar';
 import { KOMODITI_LIST } from 'constants/komoditi';
 
 export default function KomoditiPage() {

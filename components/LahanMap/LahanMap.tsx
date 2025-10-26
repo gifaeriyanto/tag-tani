@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import type { Lahan } from 'constants/lahan';
 
 const LahanMapClient = dynamic(

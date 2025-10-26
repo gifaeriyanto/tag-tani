@@ -13,14 +13,6 @@ interface HorizontalBarChartProps {
   data: KecamatanData[];
 }
 
-const commodityColors: { [key: string]: string } = {
-  Padi: '#22c55e',
-  Jagung: '#eab308',
-  Kedelai: '#f97316',
-  'Kacang Tanah': '#ef4444',
-  'Kacang Hijau': '#84cc16',
-};
-
 export function HorizontalBarChart({ data }: HorizontalBarChartProps) {
   // Calculate max value across all commodities
   const maxValue = Math.max(

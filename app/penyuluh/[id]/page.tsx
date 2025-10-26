@@ -1,12 +1,12 @@
 'use client';
 
-import Link from 'next/link';
 import { ArrowLeftIcon, PencilIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Sidebar } from 'components/Sidebar';
 import { Header } from 'components/Header';
-import { PENYULUH_LIST } from 'constants/penyuluh';
+import { Sidebar } from 'components/Sidebar';
 import { KELOMPOK_TANI_LIST } from 'constants/kelompokTani';
+import { PENYULUH_LIST } from 'constants/penyuluh';
 
 export default function PenyuluhDetailPage() {
   const params = useParams();

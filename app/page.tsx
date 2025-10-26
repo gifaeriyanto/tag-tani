@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
-import { Sidebar } from 'components/Sidebar';
-import { Header } from 'components/Header';
-import { StatCard } from 'components/StatCard';
+import { useState } from 'react';
 import { DateRangeFilter } from 'components/DateRangeFilter';
+import { Header } from 'components/Header';
 import { HorizontalBarChart } from 'components/HorizontalBarChart';
+import { Sidebar } from 'components/Sidebar';
+import { StatCard } from 'components/StatCard';
 import {
   DASHBOARD_STATS,
   HARVEST_TRENDS_LAST_MONTH,

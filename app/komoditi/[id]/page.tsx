@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { ArrowLeftIcon, PencilIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Sidebar } from 'components/Sidebar';
 import { Header } from 'components/Header';
+import { Sidebar } from 'components/Sidebar';
 import { KOMODITI_LIST } from 'constants/komoditi';
 
 export default function KomoditiDetailPage() {

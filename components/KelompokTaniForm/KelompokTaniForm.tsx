@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import type { KelompokTani } from 'constants/kelompokTani';
 import { COMMODITIES, WAJO_KECAMATAN } from 'constants/kelompokTani';
 
@@ -31,14 +31,6 @@ export function KelompokTaniForm({ initialData, mode }: KelompokTaniFormProps) {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }));
-  };
-
-  const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: parseFloat(value) || 0,
     }));
   };
 

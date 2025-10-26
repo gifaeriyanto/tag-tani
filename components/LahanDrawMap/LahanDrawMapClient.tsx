@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import type L from 'leaflet';
+import { NavigationIcon, Trash2Icon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import {
   MapContainer,
   Polygon,
@@ -9,7 +10,6 @@ import {
   useMap,
   useMapEvents,
 } from 'react-leaflet';
-import { NavigationIcon, Trash2Icon } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 

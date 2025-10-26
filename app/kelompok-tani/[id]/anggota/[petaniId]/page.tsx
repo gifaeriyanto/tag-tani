@@ -1,10 +1,10 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { ArrowLeftIcon, PencilIcon } from 'lucide-react';
-import { Sidebar } from 'components/Sidebar';
+import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
 import { Header } from 'components/Header';
+import { Sidebar } from 'components/Sidebar';
 import { PETANI_LIST } from 'constants/petani';
 
 export default function PetaniDetailPage() {

@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import {
   HandHeartIcon,
   HomeIcon,
@@ -10,6 +8,8 @@ import {
   UsersIcon,
   WheatIcon,
 } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 interface NavItem {
   href: string;
