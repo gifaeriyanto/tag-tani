@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import type L from 'leaflet';
 import {
   MapContainer,
   Polygon,
@@ -63,7 +64,7 @@ function DrawControl({
   );
 
   useEffect(() => {
-    let drawControl: any = null;
+    let drawControl: L.Control | null = null;
 
     // Dynamically import leaflet and leaflet-draw
     const initializeDrawing = async () => {
@@ -77,7 +78,8 @@ function DrawControl({
       }
 
       // Initialize drawing controls with only polygon enabled
-      drawControl = new L.Control.Draw({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      drawControl = new (L as any).Control.Draw({
         position: 'topleft',
         draw: {
           polygon: {
@@ -97,12 +99,16 @@ function DrawControl({
         edit: false, // Disable edit toolbar completely
       });
 
-      map.addControl(drawControl);
+      if (drawControl) {
+        map.addControl(drawControl);
+      }
 
       // Handle polygon creation
-      const handleDrawCreated = (event: any) => {
+      const handleDrawCreated = (event: { layer: { getLatLngs: () => Array<Array<{ lat: number; lng: number }>> } }) => {
         const layer = event.layer;
-        const latLngs = layer.getLatLngs()[0];
+        const latLngsArray = layer.getLatLngs();
+        const latLngs = latLngsArray?.[0];
+        if (!latLngs) return;
         const coords: [number, number][] = latLngs.map(
           (ll: { lat: number; lng: number }) => [ll.lat, ll.lng]
         );
@@ -126,7 +132,7 @@ function DrawControl({
       if (drawControl) {
         try {
           map.removeControl(drawControl);
-        } catch (e) {
+        } catch {
           // Control might already be removed
         }
       }
