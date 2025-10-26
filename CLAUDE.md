@@ -152,33 +152,152 @@ styles/
 
 ## Code Patterns & Conventions
 
-### Component Structure
-```typescript
-// ✅ ALWAYS start interactive components with 'use client'
-'use client';
+### React Server Components (RSC) Pattern
 
-interface ComponentProps {
-  // Define all props explicitly
+**CRITICAL**: Follow the RSC pattern for Next.js 15:
+
+```typescript
+// ✅ PAGES ARE ALWAYS SERVER COMPONENTS (NO 'use client')
+// app/feature/page.tsx
+import { Sidebar } from '@/components/Sidebar/Sidebar';
+import { Header } from '@/components/Header/Header';
+import { FeatureListClient } from './FeatureListClient';
+import { getFeatureData } from '@/lib/data';  // Server-side data fetch
+
+export default async function FeaturePage() {
+  // ✅ Fetch data here on the server BEFORE rendering
+  const data = await getFeatureData();
+
+  // Server-side render UI with data
+  return (
+    <div className="flex">
+      <Sidebar />
+      <main className="flex-1 ml-[220px] mt-16">
+        <div className="p-6">
+          {/* Pass data to client components as props */}
+          <FeatureListClient initialData={data} />
+        </div>
+      </main>
+    </div>
+  );
 }
 
-export function ComponentName({ ...props }: ComponentProps) {
-  // Component logic
-  return ( /* JSX */ );
+// ✅ INTERACTIVE COMPONENTS ARE CLIENT COMPONENTS
+// app/feature/FeatureListClient.tsx
+'use client';
+
+interface FeatureListClientProps {
+  initialData: FeatureData[];
+}
+
+export function FeatureListClient({ initialData }: FeatureListClientProps) {
+  const [items, setItems] = useState(initialData);
+
+  return (
+    // Interactive content here
+  );
+}
+```
+
+### Page Structure (Server Components)
+- ✅ Pages are **always** server components (no `'use client'`)
+- ✅ Fetch data on the server BEFORE rendering
+- ✅ Pass data to client components as props
+- ✅ Create `loading.tsx` in the same directory for loading states
+- ✅ Use `async/await` for server-side operations
+
+Example structure:
+```
+app/feature/
+├── page.tsx              # Server component (fetches data, renders layout)
+├── loading.tsx           # Loading skeleton (shown while page.tsx loads)
+├── FeatureListClient.tsx # Client component (handles interactions)
+└── FeatureFormClient.tsx # Client component (handles form submission)
+```
+
+### loading.tsx Pattern
+
+Create a loading skeleton for better UX:
+
+```typescript
+// app/feature/loading.tsx
+export default function FeatureLoading() {
+  return (
+    <div className="flex">
+      <div className="ml-[220px] mt-16 w-full p-6">
+        <div className="animate-pulse">
+          {/* Skeleton loading UI */}
+          <div className="h-8 w-32 bg-gray-200 rounded mb-4" />
+          <div className="grid grid-cols-3 gap-4">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="h-40 bg-gray-200 rounded" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Component Structure
+
+#### Server Components (Pages)
+```typescript
+// ✅ Pages and data-fetching components are SERVER components
+// NO 'use client' directive
+// CAN use async/await
+// CAN call databases directly
+
+import { getDataFromAPI } from '@/lib/api';
+
+export default async function PageComponent() {
+  const data = await getDataFromAPI();
+
+  return (
+    <ClientComponent data={data} />
+  );
+}
+```
+
+#### Client Components (Interactive)
+```typescript
+// ✅ Interactive components use 'use client' directive
+'use client';
+
+import { useState, useCallback } from 'react';
+
+interface ComponentProps {
+  initialData: DataType[];
+}
+
+export function ClientComponent({ initialData }: ComponentProps) {
+  const [items, setItems] = useState(initialData);
+
+  const handleAction = useCallback(() => {
+    // Handle user interactions
+  }, []);
+
+  return (
+    // Interactive JSX
+  );
 }
 ```
 
 ### Forms
+- ✅ Form components use `'use client'` directive
 - Use `useState` for form state (controlled components)
 - Organize fields into logical sections
 - Use HTML5 validation attributes (`required`, `type`)
-- Console.log on submit (ready for API integration)
+- Server action for submission OR `onChange` handlers
 - Example: `/components/KelompokTaniForm/KelompokTaniForm.tsx`
 
 ### Lists & Cards
+- ✅ List pages are server components (fetch data)
+- Create client component for interactivity (filtering, pagination)
 - Use card components for visual grouping
 - Include action buttons (View, Edit, Delete)
-- Use mock data from `/constants`
-- Example: `/app/kelompok-tani/page.tsx`
+- Example: `/app/kelompok-tani/page.tsx` (server) → passes data to client component
 
 ### Maps
 - Use Leaflet with React Leaflet wrapper
@@ -259,28 +378,121 @@ pnpm storybook       # Start Storybook
 
 ---
 
-## Adding New Pages
+## Adding New Pages (RSC Pattern)
+
+### Step-by-Step
 
 1. **Create directory** in `app/` following Next.js conventions
-2. **Create `page.tsx`** with layout (Sidebar, Header already in root layout)
-3. **Add components** to `/components/` as needed
-4. **Use mock data** from `/constants/` (ready for API swap)
-5. **Follow styling** with Tailwind only
-6. **Test responsiveness** on mobile/tablet/desktop
+2. **Create `page.tsx`** as server component (fetch data here)
+3. **Create `loading.tsx`** for loading skeleton
+4. **Create client components** (e.g., `FeatureListClient.tsx`, `FeatureFormClient.tsx`) for interactivity
+5. **Use mock data** from `/constants/` (ready for API swap)
+6. **Follow styling** with Tailwind only
+7. **Test responsiveness** on mobile/tablet/desktop
 
-Example structure for new page:
+### Example Structure for New Page
+
+```
+app/penyuluh/
+├── page.tsx                 # Server component - fetches data
+├── loading.tsx              # Loading skeleton
+├── PenyuluhListClient.tsx   # Client component - list with filters
+├── PenyuluhFormClient.tsx   # Client component - form handling
+└── [id]/
+    ├── page.tsx             # Server component - fetches single item
+    ├── loading.tsx          # Loading skeleton
+    └── PenyuluhDetailClient.tsx
+```
+
+### Example Page Implementation
+
 ```typescript
-// app/new-feature/page.tsx
-import { Header } from '@/components/Header/Header';
+// ✅ app/penyuluh/page.tsx - Server component
 import { Sidebar } from '@/components/Sidebar/Sidebar';
+import { PenyuluhListClient } from './PenyuluhListClient';
+import { PENYULUH_LIST } from '@/constants/penyuluh';
 
-export default function NewFeaturePage() {
+// Currently using mock data; ready for API integration:
+// const data = await fetch('API_URL/penyuluh')
+
+export default async function PenyuluhPage() {
+  // ✅ Fetch data here on server (before rendering)
+  const penyuluhList = PENYULUH_LIST;
+
   return (
     <div className="flex">
       <Sidebar />
       <main className="flex-1 ml-[220px] mt-16">
-        {/* Your content */}
+        <div className="p-6">
+          <h1 className="text-3xl font-bold mb-6">Penyuluh</h1>
+          {/* Pass data to client component */}
+          <PenyuluhListClient initialData={penyuluhList} />
+        </div>
       </main>
+    </div>
+  );
+}
+```
+
+```typescript
+// ✅ app/penyuluh/loading.tsx - Loading skeleton
+export default function PenyuluhLoading() {
+  return (
+    <div className="flex">
+      <div className="ml-[220px] mt-16 w-full p-6">
+        <div className="animate-pulse space-y-4">
+          {/* Header skeleton */}
+          <div className="h-10 w-32 bg-gray-200 rounded" />
+
+          {/* Cards skeleton */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="h-48 bg-gray-200 rounded-lg" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+```typescript
+// ✅ app/penyuluh/PenyuluhListClient.tsx - Client component
+'use client';
+
+import { useState } from 'react';
+import { PenyuluhCard } from '@/components/PenyuluhCard/PenyuluhCard';
+
+interface PenyuluhListClientProps {
+  initialData: Penyuluh[];
+}
+
+export function PenyuluhListClient({ initialData }: PenyuluhListClientProps) {
+  const [penyuluhList, setPenyuluhList] = useState(initialData);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredList = penyuluhList.filter(item =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="space-y-4">
+      {/* Search input */}
+      <input
+        type="text"
+        placeholder="Search penyuluh..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="w-full px-4 py-2 border border-gray-200 rounded-lg"
+      />
+
+      {/* Cards grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filteredList.map(penyuluh => (
+          <PenyuluhCard key={penyuluh.id} penyuluh={penyuluh} />
+        ))}
+      </div>
     </div>
   );
 }

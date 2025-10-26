@@ -123,13 +123,12 @@ BEFORE YOU START - CLARIFY YOUR TASK:
    • Create, Read, Update, Delete (CRUD) operations?
    • Any special features? (uploads, filtering, export, maps?)
 
-5️⃣  CONSISTENCY CHECK
-   • Read /CLAUDE.md for:
-     - Code patterns and conventions
-     - Design system and colors
-     - Existing component examples
-     - Data structures
-     - File locations
+5️⃣  RSC & ARCHITECTURE
+   • Pages are SERVER components (no 'use client')
+   • Client components for interactivity (with 'use client')
+   • Always create loading.tsx for skeleton UI
+   • Fetch data on server BEFORE rendering
+   • Read /CLAUDE.md for RSC patterns section
 
 ─────────────────────────────────────────────────────────────
 
