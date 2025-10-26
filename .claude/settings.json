@@ -1,0 +1,9 @@
+{
+  "hooks": [
+    {
+      "hookName": "SessionStart",
+      "matcher": "*",
+      "command": "node .claude/hooks/session-start.js"
+    }
+  ]
+}
