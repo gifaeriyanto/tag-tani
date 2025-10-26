@@ -353,12 +353,12 @@ export function ClientComponent({ initialData }: ComponentProps) {
 ✅ Kelompok Tani (`/kelompok-tani`) - List, Create, Edit, Detail
 ✅ Anggota/Farmers (`/kelompok-tani/[id]/anggota`) - List, Create, Edit, Detail
 ✅ Lahan/Land (`/lahan`) - Map view, grouped list, Add, Edit, Detail
+✅ Penyuluh (Agricultural Advisors) - `/penyuluh` - List, Create, Edit, Detail
 
 ---
 
 ## Planned Pages (In Sidebar)
 
-⏳ Penyuluh (Agricultural Advisors) - `/penyuluh`
 ⏳ Komoditi (Commodities) - `/komoditi`
 ⏳ Bantuan Petani (Farmer Assistance) - `/bantuan-petani`
 
@@ -573,17 +573,116 @@ pnpm storybook:build     # Build static version
 
 ---
 
+## Consistency Checklist (IMPORTANT - Must Check for Every New Page!)
+
+### Detail Pages (`/app/[feature]/[id]/page.tsx`)
+- ✅ Use `useRouter` hook to access router
+- ✅ Back button uses `onClick={() => router.back()}` (NOT Link to parent)
+- ✅ Page header structure:
+  ```typescript
+  <div className="mb-8">
+    <button onClick={() => router.back()} className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4">
+      <ArrowLeftIcon className="w-4 h-4" />
+      Kembali
+    </button>
+    <div className="flex items-start justify-between">
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">{title}</h1>
+        <p className="text-gray-600">{subtitle}</p>
+      </div>
+      <Link href={`/feature/${id}/edit`} className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+        <PencilIcon className="w-4 h-4" />
+        Edit
+      </Link>
+    </div>
+  </div>
+  ```
+- ✅ Content sections use: `<div className="space-y-6">` with white cards
+- ✅ Each card: `<div className="bg-white rounded-xl border border-gray-200 p-6">`
+- ✅ Card headers: `<h2 className="text-lg font-semibold text-gray-900 mb-4">`
+- ✅ Field labels: `<p className="text-sm text-gray-500 mb-1">`
+- ✅ Field values: `<p className="text-sm font-medium text-gray-900">`
+- ✅ Use `md:col-span-2` for full-width fields in 2-column grid
+
+### Form Pages (Create/Edit)
+- ✅ Create page (`/app/[feature]/create/page.tsx`):
+  ```typescript
+  <div className="mb-8">
+    <h1 className="text-3xl font-bold text-gray-900 mb-2">Tambah [Feature]</h1>
+    <p className="text-gray-600">Isi formulir di bawah untuk menambah [feature] baru</p>
+  </div>
+  <FormComponent mode="create" />
+  ```
+- ✅ Edit page includes back button with `router.back()`
+- ✅ Edit page shows subtitle with entity name: `<p className="text-gray-600">Perbarui informasi [feature] {item.name}</p>`
+- ✅ **Form component must be separate** (e.g., `KelompokTaniForm`, `PenyuluhForm`)
+- ✅ Form sections use: `<div className="bg-white rounded-xl border border-gray-200 p-6">`
+- ✅ Form action buttons (NO white box, just flex container):
+  ```typescript
+  <div className="flex items-center justify-end gap-3">
+    <button type="button" onClick={handleCancel} className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+      Batal
+    </button>
+    <button type="submit" className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+      {mode === 'create' ? 'Tambah [Feature]' : 'Simpan Perubahan'}
+    </button>
+  </div>
+  ```
+
+### List Pages (`/app/[feature]/page.tsx`)
+- ✅ Page header:
+  ```typescript
+  <div className="mb-8 flex items-center justify-between">
+    <div>
+      <h1 className="text-3xl font-bold text-gray-900 mb-2">[Feature Title]</h1>
+      <p className="text-gray-600">[Description]</p>
+    </div>
+    <Link href="/feature/create" className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+      <PlusIcon className="w-5 h-5" />
+      Tambah [Feature]
+    </Link>
+  </div>
+  ```
+- ✅ Search bar with SearchIcon
+- ✅ Use Card component for each list item with action buttons
+- ✅ Empty state message in white box
+
+### Card Components (List Items)
+- ✅ Shows entity name prominently
+- ✅ Shows key identifier (NIK, NIP, code, etc.)
+- ✅ Shows 2-3 key fields in middle section
+- ✅ **Do NOT show status in list view** (for cleaner display)
+- ✅ Action buttons on right: Eye (view), Pencil (edit), Trash (delete)
+- ✅ Links use correct paths to detail/edit pages
+
+### Loading Skeleton
+- ✅ Must exist for every list page (`/app/[feature]/loading.tsx`)
+- ✅ Matches approximate structure of actual page
+- ✅ Uses `animate-pulse` for skeleton effect
+
+### Mock Data (`/constants/[feature].ts`)
+- ✅ Export interface for TypeScript
+- ✅ Export const array with sample data
+- ✅ Include any option arrays (SPECIALIZATION_OPTIONS, STATUS_OPTIONS, etc.)
+- ✅ Provide 6-8 sample records for realistic display
+
+---
+
 ## Next Steps for New Features
 
 When adding new pages/features:
 1. Define data structure in this CLAUDE.md
-2. Create mock data in `/constants/`
-3. Build page structure in `app/`
-4. Build child components in `components/`
-5. Use existing patterns from Kelompok Tani, Petani, Lahan
-6. Test responsive design
-7. Document in this file
-8. Ready for API integration
+2. Create mock data in `/constants/` (follow existing patterns)
+3. **Check consistency checklist above BEFORE coding**
+4. Build list page with search and cards
+5. Build detail page with proper navigation
+6. Build form component (separate from pages)
+7. Build create/edit pages using form component
+8. Create loading skeleton
+9. Test responsive design
+10. Verify all consistency items checked
+11. Document in this file
+12. Ready for API integration
 
 ---
 
