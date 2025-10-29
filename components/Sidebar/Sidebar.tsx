@@ -4,6 +4,7 @@ import {
   HandHeartIcon,
   HomeIcon,
   MapIcon,
+  PackageIcon,
   UserCheckIcon,
   UsersIcon,
   WheatIcon,
@@ -23,6 +24,7 @@ const navItems: NavItem[] = [
   { href: '/lahan', label: 'Lahan', icon: MapIcon },
   { href: '/penyuluh', label: 'Penyuluh', icon: UserCheckIcon },
   { href: '/komoditi', label: 'Komoditi', icon: WheatIcon },
+  { href: '/pupuk', label: 'Pupuk', icon: PackageIcon },
   { href: '/bantuan-petani', label: 'Bantuan Petani', icon: HandHeartIcon },
 ];
 

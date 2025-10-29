@@ -1,0 +1,1 @@
+export { PupukDistributionCard } from './PupukDistributionCard';

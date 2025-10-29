@@ -1,0 +1,1 @@
+export { PupukAnomalyCard } from './PupukAnomalyCard';

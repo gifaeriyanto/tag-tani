@@ -2,7 +2,7 @@
 
 **Project**: Agricultural Management System for Indonesian Farmer Groups (Kelompok Tani)
 **Tech Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS v4, Radix UI
-**Last Updated**: October 26, 2025
+**Last Updated**: October 29, 2025
 
 ---
 
@@ -71,6 +71,15 @@ app/
     [kelompok-id]/[lahan-id]/
       page.tsx                      # Land detail
       edit/page.tsx                 # Edit land
+  pupuk/
+    page.tsx                        # Pupuk list
+    dashboard/page.tsx              # Analytics dashboard
+    distribusi/page.tsx             # Distribution tracking
+    anomali/page.tsx                # Anomaly detection
+    create/page.tsx                 # Create pupuk
+    [id]/
+      page.tsx                      # Pupuk detail
+      edit/page.tsx                 # Edit pupuk
 
 components/
   Sidebar/Sidebar.tsx               # Fixed left navigation
@@ -354,13 +363,22 @@ export function ClientComponent({ initialData }: ComponentProps) {
 ✅ Anggota/Farmers (`/kelompok-tani/[id]/anggota`) - List, Create, Edit, Detail
 ✅ Lahan/Land (`/lahan`) - Map view, grouped list, Add, Edit, Detail
 ✅ Penyuluh (Agricultural Advisors) - `/penyuluh` - List, Create, Edit, Detail
+✅ Komoditi (Commodities) - `/komoditi` - List, Create, Edit, Detail
+✅ Bantuan Petani (Farmer Assistance) - `/bantuan-petani` - List, Create, Edit, Detail
+✅ **NEW** Pupuk (Fertilizer Monitoring) - `/pupuk`:
+  - List page with type filtering
+  - Detail page showing stock per kelompok, distributions, and usage
+  - Create/Edit form pages
+  - Distribution tracking (`/pupuk/distribusi`)
+  - Anomaly detection dashboard (`/pupuk/anomali`) with regional visualization
+  - Analytics dashboard (`/pupuk/dashboard`) with real-time monitoring
 
 ---
 
-## Planned Pages (In Sidebar)
+## Planned Pages (Future)
 
-⏳ Komoditi (Commodities) - `/komoditi`
-⏳ Bantuan Petani (Farmer Assistance) - `/bantuan-petani`
+⏳ Additional analytics modules
+⏳ Advanced reporting features
 
 ---
 
