@@ -1,4 +1,4 @@
-import { HandHeartIcon, UserCheckIcon, UsersIcon, WheatIcon } from "lucide-react"
+import { AlertCircleIcon, HandHeartIcon, PackageIcon, TrendingUpIcon, UserCheckIcon, UsersIcon, WheatIcon } from "lucide-react"
 
 export const DASHBOARD_STATS = [
   {
@@ -32,6 +32,42 @@ export const DASHBOARD_STATS = [
     iconBgColor: "bg-green-50",
     iconColor: "text-green-600",
     subtitle: "Bulan ini",
+  },
+]
+
+// Pupuk (Fertilizer) Dashboard Stats
+export const PUPUK_DASHBOARD_STATS = [
+  {
+    title: "Total Jenis Pupuk",
+    value: 6,
+    subtitle: "6 jenis tersedia",
+    icon: PackageIcon,
+    iconBgColor: "bg-blue-50",
+    iconColor: "text-blue-600",
+  },
+  {
+    title: "Total Stok Pupuk",
+    value: "9,380",
+    subtitle: "dalam berbagai satuan",
+    icon: TrendingUpIcon,
+    iconBgColor: "bg-blue-50",
+    iconColor: "text-blue-600",
+  },
+  {
+    title: "Distribusi Pupuk",
+    value: 6,
+    subtitle: "minggu ini",
+    icon: PackageIcon,
+    iconBgColor: "bg-blue-50",
+    iconColor: "text-blue-600",
+  },
+  {
+    title: "Anomali Terbuka",
+    value: 3,
+    subtitle: "perlu ditindaklanjuti",
+    icon: AlertCircleIcon,
+    iconBgColor: "bg-amber-50",
+    iconColor: "text-amber-600",
   },
 ]
 
@@ -264,5 +300,39 @@ export const HARVEST_TRENDS_LAST_YEAR = [
       { name: "Jagung", value: 2520, color: "#eab308" },
       { name: "Kacang Tanah", value: 840, color: "#ef4444" },
     ],
+  },
+]
+
+// Open Pupuk Anomalies for Dashboard
+export const DASHBOARD_OPEN_ANOMALIES = [
+  {
+    id: "anom-1",
+    type: "overstock",
+    severity: "medium",
+    kelompokTaniName: "Kelompok Tani Maju Jaya",
+    pupukName: "Pupuk Organik Kompos",
+    description: "Stok kompos organik melebihi kapasitas gudang (8500 kg > kapasitas 8000 kg)",
+    detectedAt: "2024-10-28",
+    status: "open",
+  },
+  {
+    id: "anom-2",
+    type: "understock",
+    severity: "high",
+    kelompokTaniName: "Kelompok Tani Makmur Sejahtera",
+    pupukName: "Pupuk Urea 46",
+    description: "Stok pupuk Urea kritik (35 karung < minimum 150 karung)",
+    detectedAt: "2024-10-27",
+    status: "in_review",
+  },
+  {
+    id: "anom-3",
+    type: "delayed_delivery",
+    severity: "high",
+    kelompokTaniName: "Kelompok Tani Subur Makmur",
+    pupukName: "Pupuk SP36",
+    description: "Pengiriman pupuk SP36 terlambat 8 hari dari jadwal",
+    detectedAt: "2024-10-28",
+    status: "open",
   },
 ]
