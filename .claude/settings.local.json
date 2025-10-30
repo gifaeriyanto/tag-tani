@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "WebSearch",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "mcp__unsplash__search_photos",
+      "mcp__unsplash__download_photo",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__wait_for",
+      "mcp__chrome-devtools__take_screenshot",
+      "mcp__chrome-devtools__resize_page"
     ],
     "deny": [],
     "ask": []
