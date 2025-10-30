@@ -1,6 +1,5 @@
 'use client';
 
-import { CheckCircleIcon, ClockIcon, XCircleIcon } from 'lucide-react';
 import { PupukAnomaly } from 'constants/pupuk';
 
 interface PupukAnomalyCardProps {

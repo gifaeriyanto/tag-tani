@@ -1,5 +1,12 @@
 'use client';
 
+import {
+  BarChart3Icon,
+  TrendingDownIcon,
+  TrendingUpIcon,
+  TruckIcon,
+} from 'lucide-react';
+import Link from 'next/link';
 import { Header } from 'components/Header';
 import { Sidebar } from 'components/Sidebar';
 import { StatCard } from 'components/StatCard';
@@ -10,13 +17,6 @@ import {
   PUPUK_STOCK_LIST,
   PUPUK_USAGE_LIST,
 } from 'constants/pupuk';
-import {
-  BarChart3Icon,
-  TrendingDownIcon,
-  TrendingUpIcon,
-  TruckIcon,
-} from 'lucide-react';
-import Link from 'next/link';
 
 export default function PupukDashboardPage() {
   // Calculate key metrics

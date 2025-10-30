@@ -123,7 +123,7 @@ export function Sidebar() {
               )}
 
               {/* Sub-menu items */}
-              {hasSubItems && isExpanded && (
+              {hasSubItems && isExpanded && item.subItems && (
                 <div className="ml-2 mb-2 space-y-1 border-l border-gray-200 pl-3">
                   {item.subItems.map((subItem) => {
                     const subActive = isActive(subItem.href);
