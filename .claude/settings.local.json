@@ -8,7 +8,9 @@
       "mcp__chrome-devtools__navigate_page",
       "mcp__chrome-devtools__wait_for",
       "mcp__chrome-devtools__take_screenshot",
-      "mcp__chrome-devtools__resize_page"
+      "mcp__chrome-devtools__resize_page",
+      "Bash(find:*)",
+      "mcp__chrome-devtools__new_page"
     ],
     "deny": [],
     "ask": []
