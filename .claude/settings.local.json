@@ -10,7 +10,9 @@
       "mcp__chrome-devtools__take_screenshot",
       "mcp__chrome-devtools__resize_page",
       "Bash(find:*)",
-      "mcp__chrome-devtools__new_page"
+      "mcp__chrome-devtools__new_page",
+      "mcp__chrome-devtools__list_console_messages",
+      "mcp__chrome-devtools__list_pages"
     ],
     "deny": [],
     "ask": []

@@ -1,6 +1,6 @@
 'use client';
 
-import { AlertTriangleIcon, CheckCircleIcon, ClockIcon, XCircleIcon } from 'lucide-react';
+import { CheckCircleIcon, ClockIcon, XCircleIcon } from 'lucide-react';
 import { PupukAnomaly } from 'constants/pupuk';
 
 interface PupukAnomalyCardProps {
@@ -10,46 +10,27 @@ interface PupukAnomalyCardProps {
 
 export function PupukAnomalyCard({ data, onStatusChange }: PupukAnomalyCardProps) {
   const severityConfig = {
-    low: {
-      color: 'bg-yellow-50 border-yellow-200',
-      textColor: 'text-yellow-800',
-      bgColor: 'bg-yellow-100',
-      badge: 'Rendah',
-    },
-    medium: {
-      color: 'bg-orange-50 border-orange-200',
-      textColor: 'text-orange-800',
-      bgColor: 'bg-orange-100',
-      badge: 'Sedang',
-    },
-    high: {
-      color: 'bg-red-50 border-red-200',
-      textColor: 'text-red-800',
-      bgColor: 'bg-red-100',
-      badge: 'Tinggi',
-    },
+    low: { label: 'Rendah', color: 'bg-yellow-100 text-yellow-800' },
+    medium: { label: 'Sedang', color: 'bg-orange-100 text-orange-800' },
+    high: { label: 'Tinggi', color: 'bg-red-100 text-red-800' },
   };
 
   const statusConfig = {
     open: {
-      icon: AlertTriangleIcon,
+      icon: '⚠️',
       label: 'Terbuka',
-      color: 'text-red-600',
     },
     in_review: {
-      icon: ClockIcon,
+      icon: '🔄',
       label: 'Dalam Review',
-      color: 'text-blue-600',
     },
     resolved: {
-      icon: CheckCircleIcon,
+      icon: '✓',
       label: 'Terselesaikan',
-      color: 'text-green-600',
     },
     dismissed: {
-      icon: XCircleIcon,
+      icon: '✕',
       label: 'Ditolak',
-      color: 'text-gray-600',
     },
   };
 
@@ -63,101 +44,67 @@ export function PupukAnomalyCard({ data, onStatusChange }: PupukAnomalyCardProps
 
   const severity = severityConfig[data.severity];
   const status = statusConfig[data.status];
-  const StatusIcon = status.icon;
 
   return (
-    <div className={`rounded-xl border ${severity.color} p-5 hover:shadow-md transition-shadow`}>
-      <div className="flex items-start justify-between gap-4">
-        {/* Left Content */}
-        <div className="flex-1">
-          {/* Header with severity and type */}
-          <div className="flex items-start gap-3 mb-3">
-            <div className={`flex items-center justify-center w-10 h-10 rounded-full flex-shrink-0 ${severity.bgColor}`}>
-              <AlertTriangleIcon className={`w-5 h-5 ${severity.textColor}`} />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <h3 className="font-semibold text-gray-900">{typeConfig[data.type]}</h3>
-                <span className={`px-2 py-0.5 text-xs font-medium rounded ${severity.bgColor} ${severity.textColor}`}>
-                  {severity.badge}
-                </span>
-              </div>
-              <p className="text-sm text-gray-600">
-                {data.kelompokTaniName} • {data.kecamatan}
-              </p>
-            </div>
-          </div>
-
-          {/* Description */}
-          <p className="text-sm text-gray-700 mb-3">{data.description}</p>
-
-          {/* Details Grid */}
-          <div className="grid grid-cols-2 gap-3 text-xs">
-            <div>
-              <p className="text-gray-600">Terdeteksi</p>
-              <p className="font-medium text-gray-900">
-                {new Date(data.detectedAt).toLocaleDateString('id-ID')}
-              </p>
-            </div>
-            {data.pupukName && (
-              <div>
-                <p className="text-gray-600">Pupuk</p>
-                <p className="font-medium text-gray-900 truncate">{data.pupukName}</p>
-              </div>
-            )}
-            {data.resolvedAt && (
-              <div>
-                <p className="text-gray-600">Terselesaikan</p>
-                <p className="font-medium text-gray-900">
-                  {new Date(data.resolvedAt).toLocaleDateString('id-ID')}
-                </p>
-              </div>
-            )}
-          </div>
-
-          {/* Recommendation */}
-          {data.recommendation && (
-            <div className="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
-              <p className="text-xs font-medium text-blue-900 mb-1">💡 Rekomendasi:</p>
-              <p className="text-xs text-blue-800">{data.recommendation}</p>
-            </div>
-          )}
+    <div className="rounded-lg border border-gray-200 bg-white p-4">
+      <div className="flex items-center justify-between gap-4">
+        {/* Left side - Type & Severity */}
+        <div className="w-48 shrink-0">
+          <h3 className="text-sm font-semibold text-gray-900">{typeConfig[data.type]}</h3>
+          <p className="mt-0.5 text-xs text-gray-500">
+            {data.kelompokTaniName} • {data.kecamatan}
+          </p>
         </div>
 
-        {/* Right Side - Status and Actions */}
-        <div className="flex flex-col items-end gap-3">
-          <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full ${severity.bgColor}`}>
-            <StatusIcon className={`w-4 h-4 ${status.color}`} />
-            <span className={`text-xs font-medium ${status.color}`}>{status.label}</span>
+        {/* Middle - Info */}
+        <div className="flex flex-1 items-center gap-6">
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-gray-500">Terdeteksi:</span>
+            <span className="text-xs font-medium text-gray-700">
+              {new Date(data.detectedAt).toLocaleDateString('id-ID')}
+            </span>
           </div>
-
-          {/* Quick Actions */}
-          {data.status === 'open' && (
-            <div className="flex gap-2">
-              {onStatusChange && (
-                <>
-                  <button
-                    onClick={() => onStatusChange(data.id, 'in_review')}
-                    className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors"
-                  >
-                    Review
-                  </button>
-                  <button
-                    onClick={() => onStatusChange(data.id, 'dismissed')}
-                    className="px-2 py-1 text-xs font-medium bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
-                  >
-                    Tolak
-                  </button>
-                </>
-              )}
+          {data.pupukName && (
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">Pupuk:</span>
+              <span className="text-xs font-medium text-gray-700">{data.pupukName}</span>
             </div>
           )}
-          {data.status === 'in_review' && onStatusChange && (
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-gray-500">Keparahan:</span>
+            <span className={`text-xs font-medium rounded px-2 py-0.5 ${severity.color}`}>
+              {severity.label}
+            </span>
+          </div>
+        </div>
+
+        {/* Right side - Status & Actions */}
+        <div className="flex flex-shrink-0 items-center gap-2">
+          <span className="text-xs font-medium text-gray-700">
+            {status.label}
+          </span>
+          {onStatusChange && data.status === 'open' && (
+            <>
+              <button
+                onClick={() => onStatusChange(data.id, 'in_review')}
+                className="rounded px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors"
+              >
+                Review
+              </button>
+              <button
+                onClick={() => onStatusChange(data.id, 'dismissed')}
+                className="rounded px-2 py-1 text-xs font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors"
+              >
+                Tolak
+              </button>
+            </>
+          )}
+          {onStatusChange && data.status === 'in_review' && (
             <button
               onClick={() => onStatusChange(data.id, 'resolved')}
-              className="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded hover:bg-green-200 transition-colors"
+              className="rounded px-2 py-1 text-xs font-medium bg-green-100 text-green-700 hover:bg-green-200 transition-colors"
             >
-              Tandai Selesai
+              Selesai
             </button>
           )}
         </div>
