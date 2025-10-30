@@ -7,15 +7,15 @@ import { Header } from 'components/Header';
 import { PupukDistributionCard } from 'components/PupukDistributionCard';
 import { Sidebar } from 'components/Sidebar';
 import {
-  PUPUK_DISTRIBUTION_LIST,
   DISTRIBUTION_STATUS_OPTIONS,
+  PUPUK_DISTRIBUTION_LIST,
   PupukDistribution,
 } from 'constants/pupuk';
 
 export default function PupukDistributionPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('');
-  const [distributions, setDistributions] = useState<PupukDistribution[]>(
+  const [distributions] = useState<PupukDistribution[]>(
     PUPUK_DISTRIBUTION_LIST
   );
 

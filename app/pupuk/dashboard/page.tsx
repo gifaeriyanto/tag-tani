@@ -11,11 +11,11 @@ import Link from 'next/link';
 import { Header } from 'components/Header';
 import { Sidebar } from 'components/Sidebar';
 import {
+  PUPUK_ANOMALY_LIST,
+  PUPUK_DISTRIBUTION_LIST,
   PUPUK_LIST,
   PUPUK_STOCK_LIST,
-  PUPUK_DISTRIBUTION_LIST,
   PUPUK_USAGE_LIST,
-  PUPUK_ANOMALY_LIST,
 } from 'constants/pupuk';
 
 export default function PupukDashboardPage() {
@@ -303,7 +303,7 @@ export default function PupukDashboardPage() {
           <div className="bg-white rounded-xl border border-gray-200 p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Stok Terbesar</h2>
             <div className="space-y-3">
-              {topStockItems.map((item, idx) => {
+              {topStockItems.map((item, _idx) => {
                 const pupuk = PUPUK_LIST.find((p) => p.id === item.pupukId);
                 const isLowStock = pupuk && item.quantity < pupuk.minStockLevel;
                 return (

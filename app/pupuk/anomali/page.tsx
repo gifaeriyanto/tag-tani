@@ -6,10 +6,10 @@ import { Header } from 'components/Header';
 import { PupukAnomalyCard } from 'components/PupukAnomalyCard';
 import { Sidebar } from 'components/Sidebar';
 import {
-  PUPUK_ANOMALY_LIST,
-  ANOMALY_TYPE_OPTIONS,
-  ANOMALY_STATUS_OPTIONS,
   ANOMALY_SEVERITY_OPTIONS,
+  ANOMALY_STATUS_OPTIONS,
+  ANOMALY_TYPE_OPTIONS,
+  PUPUK_ANOMALY_LIST,
   PupukAnomaly,
 } from 'constants/pupuk';
 

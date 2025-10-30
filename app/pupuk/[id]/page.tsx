@@ -7,14 +7,11 @@ import { use } from 'react';
 import { Header } from 'components/Header';
 import { Sidebar } from 'components/Sidebar';
 import {
+  Pupuk,
+  PUPUK_DISTRIBUTION_LIST,
   PUPUK_LIST,
   PUPUK_STOCK_LIST,
-  PUPUK_DISTRIBUTION_LIST,
   PUPUK_USAGE_LIST,
-  Pupuk,
-  PupukStock,
-  PupukDistribution,
-  PupukUsage,
 } from 'constants/pupuk';
 
 export default function PupukDetailPage({ params }: { params: Promise<{ id: string }> }) {
