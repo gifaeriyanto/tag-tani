@@ -4,8 +4,6 @@ import { ArrowLeftIcon, PencilIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { use } from 'react';
-import { Header } from 'components/Header';
-import { Sidebar } from 'components/Sidebar';
 import {
   Pupuk,
   PUPUK_DISTRIBUTION_LIST,
@@ -21,14 +19,10 @@ export default function PupukDetailPage({ params }: { params: Promise<{ id: stri
 
   if (!pupuk) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Sidebar />
-        <Header />
-        <main className="ml-[220px] mt-16 p-8">
-          <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
+      <div className="p-8">
+        <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
             <p className="text-gray-500">Pupuk tidak ditemukan</p>
-          </div>
-        </main>
+        </div>
       </div>
     );
   }
@@ -49,13 +43,9 @@ export default function PupukDetailPage({ params }: { params: Promise<{ id: stri
   const totalUsed = usages.reduce((sum, u) => sum + u.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="ml-[220px] mt-16 p-8">
-        {/* Back Button and Header */}
-        <div className="mb-8">
+    <div className="p-8">
+      {/* Back Button and Header */}
+      <div className="mb-8">
           <button
             onClick={() => router.back()}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4"
@@ -273,7 +263,6 @@ export default function PupukDetailPage({ params }: { params: Promise<{ id: stri
             </div>
           )}
         </div>
-      </main>
     </div>
   );
 }

@@ -3,9 +3,7 @@
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Header } from 'components/Header';
 import { PetaniForm } from 'components/PetaniForm';
-import { Sidebar } from 'components/Sidebar';
 import { PETANI_LIST } from 'constants/petani';
 
 export default function EditPetaniPage() {
@@ -18,12 +16,8 @@ export default function EditPetaniPage() {
 
   if (!petani) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Sidebar />
-        <Header />
-
-        <main className="ml-[220px] mt-16 p-8">
-          <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
+      <div className="p-8">
+        <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
             <p className="text-gray-500 mb-4">Petani tidak ditemukan</p>
             <Link
               href={`/kelompok-tani/${kelompokTaniId}/anggota`}
@@ -31,20 +25,15 @@ export default function EditPetaniPage() {
             >
               Kembali ke Daftar
             </Link>
-          </div>
-        </main>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="ml-[220px] mt-16 p-8">
-        {/* Page Header */}
-        <div className="mb-8">
+    <div className="p-8">
+      {/* Page Header */}
+      <div className="mb-8">
           <button
             onClick={() => router.back()}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4"
@@ -60,9 +49,8 @@ export default function EditPetaniPage() {
           </p>
         </div>
 
-        {/* Form */}
-        <PetaniForm mode="edit" initialData={petani} kelompokTaniId={kelompokTaniId} />
-      </main>
+      {/* Form */}
+      <PetaniForm mode="edit" initialData={petani} kelompokTaniId={kelompokTaniId} />
     </div>
   );
 }

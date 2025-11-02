@@ -2,19 +2,14 @@
 
 import { ArrowLeftIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { Header } from 'components/Header';
 import { KomoditiForm } from 'components/KomoditiForm';
-import { Sidebar } from 'components/Sidebar';
 
 export default function CreateKomoditiPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
+    <div className="p-8">
 
-      <main className="ml-[220px] mt-16 p-8">
         {/* Page Header */}
         <div className="mb-8">
           <button
@@ -34,7 +29,7 @@ export default function CreateKomoditiPage() {
 
         {/* Form */}
         <KomoditiForm mode="create" />
-      </main>
+
     </div>
   );
 }

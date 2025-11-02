@@ -3,9 +3,7 @@
 import { EyeIcon, MapIcon, PencilIcon, PlusIcon, TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Header } from 'components/Header';
 import { LahanMap } from 'components/LahanMap';
-import { Sidebar } from 'components/Sidebar';
 import { KELOMPOK_TANI_LIST } from 'constants/kelompokTani';
 import { getKelompokColor, LAHAN_LIST } from 'constants/lahan';
 
@@ -42,13 +40,9 @@ export default function LahanPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="ml-[220px] mt-16 p-8">
-        {/* Page Header */}
-        <div className="mb-8">
+    <div className="p-8">
+      {/* Page Header */}
+      <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">Lahan</h1>
@@ -263,7 +257,6 @@ export default function LahanPage() {
             </div>
           )}
         </div>
-      </main>
     </div>
   );
 }

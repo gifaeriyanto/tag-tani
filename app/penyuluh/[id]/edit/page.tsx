@@ -3,9 +3,7 @@
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Header } from 'components/Header';
 import { PenyuluhForm } from 'components/PenyuluhForm';
-import { Sidebar } from 'components/Sidebar';
 import { PENYULUH_LIST } from 'constants/penyuluh';
 
 export default function EditPenyuluhPage() {
@@ -17,11 +15,8 @@ export default function EditPenyuluhPage() {
 
   if (!penyuluh) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Sidebar />
-        <Header />
+      <div className="p-8">
 
-        <main className="ml-[220px] mt-16 p-8">
           <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
             <p className="text-gray-500 mb-4">Penyuluh tidak ditemukan</p>
             <Link
@@ -31,17 +26,14 @@ export default function EditPenyuluhPage() {
               Kembali ke Daftar
             </Link>
           </div>
-        </main>
+
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
+    <div className="p-8">
 
-      <main className="ml-[220px] mt-16 p-8">
         {/* Page Header */}
         <div className="mb-8">
           <button
@@ -61,7 +53,7 @@ export default function EditPenyuluhPage() {
 
         {/* Form */}
         <PenyuluhForm mode="edit" initialData={penyuluh} />
-      </main>
+
     </div>
   );
 }

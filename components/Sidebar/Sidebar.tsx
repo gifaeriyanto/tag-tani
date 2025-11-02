@@ -9,10 +9,12 @@ import {
   UserCheckIcon,
   UsersIcon,
   WheatIcon,
+  XIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { useSidebar } from './SidebarContext';
 
 interface SubNavItem {
   href: string;
@@ -49,6 +51,7 @@ const navItems: NavItem[] = [
 export function Sidebar() {
   const pathname = usePathname();
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  const { isOpen, close } = useSidebar();
 
   const isActive = (href: string) => {
     if (href === '/') {
@@ -67,11 +70,37 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="w-[220px] h-screen bg-white border-r border-gray-200 fixed left-0 top-0 overflow-y-auto">
-      <div className="p-6">
+    <>
+      {/* Mobile Backdrop */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={close}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={`
+          w-[220px] h-screen bg-white border-r border-gray-200 fixed left-0 top-0 overflow-y-auto z-40
+          transform transition-transform duration-300 ease-in-out
+          lg:translate-x-0 lg:z-20
+          ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        `}
+      >
+      <div className="flex items-center justify-between p-6">
         <Link href="/" className="text-2xl font-bold text-green-600">
           TagTani
         </Link>
+        {/* Close Button - Mobile Only */}
+        <button
+          onClick={close}
+          className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          aria-label="Close sidebar"
+        >
+          <XIcon className="w-5 h-5 text-gray-600" />
+        </button>
       </div>
 
       <nav className="px-3">
@@ -150,6 +179,7 @@ export function Sidebar() {
           );
         })}
       </nav>
-    </aside>
+      </aside>
+    </>
   );
 }

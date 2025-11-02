@@ -4,8 +4,6 @@ import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { BantuanPetaniForm } from 'components/BantuanPetaniForm';
-import { Header } from 'components/Header';
-import { Sidebar } from 'components/Sidebar';
 import { BANTUAN_PETANI_LIST } from 'constants/bantuanPetani';
 
 export default function EditBantuanPetaniPage() {
@@ -17,27 +15,20 @@ export default function EditBantuanPetaniPage() {
 
   if (!bantuan) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Sidebar />
-        <Header />
-        <main className="ml-[220px] mt-16 p-8">
-          <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-            <p className="text-gray-500">Bantuan tidak ditemukan</p>
-            <Link href="/bantuan-petani" className="mt-4 text-green-600 hover:underline">
-              Kembali ke daftar bantuan
-            </Link>
-          </div>
-        </main>
+      <div className="p-8">
+        <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
+          <p className="text-gray-500">Bantuan tidak ditemukan</p>
+          <Link href="/bantuan-petani" className="mt-4 text-green-600 hover:underline">
+            Kembali ke daftar bantuan
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
+    <div className="p-8">
 
-      <main className="ml-[220px] mt-16 p-8">
         {/* Page Header */}
         <div className="mb-8">
           <button
@@ -57,7 +48,7 @@ export default function EditBantuanPetaniPage() {
 
         {/* Form */}
         <BantuanPetaniForm initialData={bantuan} mode="edit" />
-      </main>
+
     </div>
   );
 }

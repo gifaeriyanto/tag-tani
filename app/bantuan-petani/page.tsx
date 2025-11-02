@@ -4,8 +4,6 @@ import { PlusIcon, SearchIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { BantuanPetaniCard } from 'components/BantuanPetaniCard';
-import { Header } from 'components/Header';
-import { Sidebar } from 'components/Sidebar';
 import { BANTUAN_PETANI_LIST } from 'constants/bantuanPetani';
 
 export default function BantuanPetaniPage() {
@@ -32,11 +30,8 @@ export default function BantuanPetaniPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
+    <div className="p-8">
 
-      <main className="ml-[220px] mt-16 p-8">
         {/* Page Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
@@ -86,7 +81,7 @@ export default function BantuanPetaniPage() {
             </p>
           </div>
         )}
-      </main>
+
     </div>
   );
 }

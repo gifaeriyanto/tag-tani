@@ -3,9 +3,7 @@
 import { PlusIcon, SearchIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Header } from 'components/Header';
 import { KomoditiCard } from 'components/KomoditiCard';
-import { Sidebar } from 'components/Sidebar';
 import { KOMODITI_LIST } from 'constants/komoditi';
 
 export default function KomoditiPage() {
@@ -31,11 +29,8 @@ export default function KomoditiPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
+    <div className="p-8">
 
-      <main className="ml-[220px] mt-16 p-8">
         {/* Page Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
@@ -85,7 +80,7 @@ export default function KomoditiPage() {
             </p>
           </div>
         )}
-      </main>
+
     </div>
   );
 }

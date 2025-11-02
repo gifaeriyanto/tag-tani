@@ -2,9 +2,7 @@
 
 import { AlertTriangleIcon, BarChart3Icon, FilterIcon, SearchIcon, TrendingUpIcon } from 'lucide-react';
 import { useState } from 'react';
-import { Header } from 'components/Header';
 import { PupukAnomalyCard } from 'components/PupukAnomalyCard';
-import { Sidebar } from 'components/Sidebar';
 import { StatCard } from 'components/StatCard';
 import {
   ANOMALY_SEVERITY_OPTIONS,
@@ -79,13 +77,9 @@ export default function PupukAnomalyPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="mt-16 ml-[220px] p-8">
-        {/* Page Title */}
-        <div className="mb-8">
+    <div className="p-8">
+      {/* Page Title */}
+      <div className="mb-8">
           <h1 className="mb-2 text-3xl font-bold text-gray-900">Deteksi Anomali Pupuk</h1>
           <p className="text-gray-600">Monitor anomali seperti overstock, understock, pengiriman terlambat, dan laporan terlambat</p>
         </div>
@@ -274,7 +268,6 @@ export default function PupukAnomalyPage() {
             </p>
           </div>
         )}
-      </main>
     </div>
   );
 }

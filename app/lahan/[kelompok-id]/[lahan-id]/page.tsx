@@ -3,9 +3,7 @@
 import { ArrowLeftIcon, MapPinIcon, PencilIcon, TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Header } from 'components/Header';
 import { LahanMap } from 'components/LahanMap';
-import { Sidebar } from 'components/Sidebar';
 import { LAHAN_LIST } from 'constants/lahan';
 
 export default function LahanDetailPage() {
@@ -26,30 +24,21 @@ export default function LahanDetailPage() {
 
   if (!lahan) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Sidebar />
-        <Header />
-
-        <main className="ml-[220px] mt-16 p-8">
-          <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
+      <div className="p-8">
+        <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
             <p className="text-gray-500 mb-4">Lahan tidak ditemukan</p>
             <Link href="/lahan" className="text-green-600 hover:text-green-700">
               Kembali ke Daftar Lahan
             </Link>
-          </div>
-        </main>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="ml-[220px] mt-16 p-8">
-        {/* Page Header */}
-        <div className="mb-8">
+    <div className="p-8">
+      {/* Page Header */}
+      <div className="mb-8">
           <button
             onClick={() => router.back()}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4"
@@ -181,7 +170,6 @@ export default function LahanDetailPage() {
             </div>
           </div>
         </div>
-      </main>
     </div>
   );
 }

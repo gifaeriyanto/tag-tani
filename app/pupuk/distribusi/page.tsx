@@ -3,9 +3,7 @@
 import { AlertCircleIcon, PlusIcon, SearchIcon, TrendingUpIcon, TruckIcon } from 'lucide-react'; // AlertCircleIcon used for stat card icon
 import Link from 'next/link';
 import { useState } from 'react';
-import { Header } from 'components/Header';
 import { PupukDistributionCard } from 'components/PupukDistributionCard';
-import { Sidebar } from 'components/Sidebar';
 import { StatCard } from 'components/StatCard';
 import {
   DISTRIBUTION_STATUS_OPTIONS,
@@ -42,13 +40,9 @@ export default function PupukDistributionPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="mt-16 ml-[220px] p-8">
-        {/* Page Title */}
-        <div className="mb-8">
+    <div className="p-8">
+      {/* Page Title */}
+      <div className="mb-8">
           <div className="mb-8 flex items-center justify-between">
             <div>
               <h1 className="mb-2 text-3xl font-bold text-gray-900">Distribusi Pupuk</h1>
@@ -155,7 +149,6 @@ export default function PupukDistributionPage() {
             </p>
           </div>
         )}
-      </main>
     </div>
   );
 }

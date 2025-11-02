@@ -2,9 +2,7 @@
 
 import { ArrowLeftIcon } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
-import { Header } from 'components/Header';
 import { PetaniForm } from 'components/PetaniForm';
-import { Sidebar } from 'components/Sidebar';
 
 export default function CreatePetaniPage() {
   const params = useParams();
@@ -12,13 +10,9 @@ export default function CreatePetaniPage() {
   const kelompokTaniId = params.id as string;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="ml-[220px] mt-16 p-8">
-        {/* Page Header */}
-        <div className="mb-8">
+    <div className="p-8">
+      {/* Page Header */}
+      <div className="mb-8">
           <button
             onClick={() => router.back()}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4"
@@ -34,9 +28,8 @@ export default function CreatePetaniPage() {
           </p>
         </div>
 
-        {/* Form */}
-        <PetaniForm mode="create" kelompokTaniId={kelompokTaniId} />
-      </main>
+      {/* Form */}
+      <PetaniForm mode="create" kelompokTaniId={kelompokTaniId} />
     </div>
   );
 }

@@ -3,9 +3,7 @@
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Header } from 'components/Header';
 import { KelompokTaniForm } from 'components/KelompokTaniForm';
-import { Sidebar } from 'components/Sidebar';
 import { KELOMPOK_TANI_LIST } from 'constants/kelompokTani';
 
 export default function EditKelompokTaniPage() {
@@ -17,12 +15,8 @@ export default function EditKelompokTaniPage() {
 
   if (!kelompokTani) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Sidebar />
-        <Header />
-
-        <main className="ml-[220px] mt-16 p-8">
-          <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
+      <div className="p-8">
+        <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
             <p className="text-gray-500 mb-4">Kelompok tani tidak ditemukan</p>
             <Link
               href="/kelompok-tani"
@@ -30,20 +24,15 @@ export default function EditKelompokTaniPage() {
             >
               Kembali ke Daftar
             </Link>
-          </div>
-        </main>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="ml-[220px] mt-16 p-8">
-        {/* Page Header */}
-        <div className="mb-8">
+    <div className="p-8">
+      {/* Page Header */}
+      <div className="mb-8">
           <button
             onClick={() => router.back()}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4"
@@ -59,9 +48,8 @@ export default function EditKelompokTaniPage() {
           </p>
         </div>
 
-        {/* Form */}
-        <KelompokTaniForm mode="edit" initialData={kelompokTani} />
-      </main>
+      {/* Form */}
+      <KelompokTaniForm mode="edit" initialData={kelompokTani} />
     </div>
   );
 }

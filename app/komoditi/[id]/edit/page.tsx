@@ -3,9 +3,7 @@
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Header } from 'components/Header';
 import { KomoditiForm } from 'components/KomoditiForm';
-import { Sidebar } from 'components/Sidebar';
 import { KOMODITI_LIST } from 'constants/komoditi';
 
 export default function EditKomoditiPage() {
@@ -17,27 +15,21 @@ export default function EditKomoditiPage() {
 
   if (!komoditi) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Sidebar />
-        <Header />
-        <main className="ml-[220px] mt-16 p-8">
+      <div className="p-8">
           <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
             <p className="text-gray-500">Komoditi tidak ditemukan</p>
             <Link href="/komoditi" className="mt-4 text-green-600 hover:underline">
               Kembali ke daftar komoditi
             </Link>
           </div>
-        </main>
+
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
+    <div className="p-8">
 
-      <main className="ml-[220px] mt-16 p-8">
         {/* Page Header */}
         <div className="mb-8">
           <button
@@ -57,7 +49,7 @@ export default function EditKomoditiPage() {
 
         {/* Form */}
         <KomoditiForm initialData={komoditi} mode="edit" />
-      </main>
+
     </div>
   );
 }

@@ -7,8 +7,6 @@ import {
   TruckIcon,
 } from 'lucide-react';
 import Link from 'next/link';
-import { Header } from 'components/Header';
-import { Sidebar } from 'components/Sidebar';
 import { StatCard } from 'components/StatCard';
 import {
   PUPUK_ANOMALY_LIST,
@@ -72,13 +70,9 @@ export default function PupukDashboardPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="mt-16 ml-[220px] p-8">
-        {/* Page Title */}
-        <div className="mb-8">
+    <div className="p-8">
+      {/* Page Title */}
+      <div className="mb-8">
           <h1 className="mb-2 text-3xl font-bold text-gray-900">Dashboard Pupuk</h1>
           <p className="text-gray-600">Pantau stok, distribusi, penggunaan, dan anomali pupuk secara real-time</p>
         </div>
@@ -355,7 +349,6 @@ export default function PupukDashboardPage() {
             Lihat Semua Distribusi →
           </Link>
         </div>
-      </main>
     </div>
   );
 }

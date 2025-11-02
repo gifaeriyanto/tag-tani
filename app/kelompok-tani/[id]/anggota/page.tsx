@@ -4,9 +4,7 @@ import { ArrowLeftIcon, PlusIcon, SearchIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Header } from 'components/Header';
 import { PetaniCard } from 'components/PetaniCard';
-import { Sidebar } from 'components/Sidebar';
 import { KELOMPOK_TANI_LIST } from 'constants/kelompokTani';
 import { PETANI_LIST } from 'constants/petani';
 
@@ -38,13 +36,9 @@ export default function PetaniListPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="ml-[220px] mt-16 p-8">
-        {/* Page Header */}
-        <div className="mb-8">
+    <div className="p-8">
+      {/* Page Header */}
+      <div className="mb-8">
           <button
             onClick={() => router.back()}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4"
@@ -106,7 +100,6 @@ export default function PetaniListPage() {
             </p>
           </div>
         )}
-      </main>
     </div>
   );
 }

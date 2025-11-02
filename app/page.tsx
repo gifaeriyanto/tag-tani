@@ -4,9 +4,7 @@ import { AlertTriangleIcon, ChevronDownIcon, ChevronUpIcon, LinkIcon } from "luc
 import Link from "next/link"
 import { useState } from "react"
 import { DateRangeFilter } from "components/DateRangeFilter"
-import { Header } from "components/Header"
 import { HorizontalBarChart } from "components/HorizontalBarChart"
-import { Sidebar } from "components/Sidebar"
 import { StatCard } from "components/StatCard"
 import {
   DASHBOARD_OPEN_ANOMALIES,
@@ -31,11 +29,7 @@ export default function Dashboard() {
   const harvestTrends = selectedFilter === "last_year" ? HARVEST_TRENDS_LAST_YEAR : HARVEST_TRENDS_LAST_MONTH
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="mt-16 ml-[220px] p-8">
+    <div className="bg-gray-50 p-8">
         {/* Page Title */}
         <div className="mb-8">
           <h1 className="mb-2 text-3xl font-bold text-gray-900">Dashboard</h1>
@@ -188,7 +182,6 @@ export default function Dashboard() {
             </div>
           )}
         </div>
-      </main>
     </div>
   )
 }

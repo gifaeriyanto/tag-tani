@@ -3,8 +3,6 @@
 import { ArrowLeftIcon, PencilIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Header } from 'components/Header';
-import { Sidebar } from 'components/Sidebar';
 import { BANTUAN_PETANI_LIST } from 'constants/bantuanPetani';
 import { KELOMPOK_TANI_LIST } from 'constants/kelompokTani';
 
@@ -38,17 +36,14 @@ export default function BantuanPetaniDetailPage() {
 
   if (!bantuan) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Sidebar />
-        <Header />
-        <main className="ml-[220px] mt-16 p-8">
+      <div className="p-8">
           <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
             <p className="text-gray-500">Bantuan tidak ditemukan</p>
             <Link href="/bantuan-petani" className="mt-4 text-green-600 hover:underline">
               Kembali ke daftar bantuan
             </Link>
           </div>
-        </main>
+
       </div>
     );
   }
@@ -58,11 +53,8 @@ export default function BantuanPetaniDetailPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
+    <div className="p-8">
 
-      <main className="ml-[220px] mt-16 p-8">
         {/* Page Header */}
         <div className="mb-8">
           <button
@@ -222,7 +214,7 @@ export default function BantuanPetaniDetailPage() {
             </div>
           )}
         </div>
-      </main>
+
     </div>
   );
 }

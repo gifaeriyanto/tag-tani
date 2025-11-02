@@ -3,9 +3,7 @@
 import { PlusIcon, SearchIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Header } from 'components/Header';
 import { PupukCard } from 'components/PupukCard';
-import { Sidebar } from 'components/Sidebar';
 import { PUPUK_LIST } from 'constants/pupuk';
 
 export default function PupukPage() {
@@ -35,13 +33,9 @@ export default function PupukPage() {
   const pupukTypes = Array.from(new Set(PUPUK_LIST.map((p) => p.type)));
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="ml-[220px] mt-16 p-8">
-        {/* Page Header */}
-        <div className="mb-8 flex items-center justify-between">
+    <div className="p-8">
+      {/* Page Header */}
+      <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Pupuk</h1>
             <p className="text-gray-600">
@@ -114,7 +108,6 @@ export default function PupukPage() {
             </p>
           </div>
         )}
-      </main>
     </div>
   );
 }

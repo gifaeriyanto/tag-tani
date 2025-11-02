@@ -3,9 +3,7 @@
 import { PlusIcon, SearchIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Header } from 'components/Header';
 import { KelompokTaniCard } from 'components/KelompokTaniCard';
-import { Sidebar } from 'components/Sidebar';
 import { KELOMPOK_TANI_LIST } from 'constants/kelompokTani';
 
 export default function KelompokTaniPage() {
@@ -31,13 +29,9 @@ export default function KelompokTaniPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <Header />
-
-      <main className="ml-[220px] mt-16 p-8">
-        {/* Page Header */}
-        <div className="mb-8 flex items-center justify-between">
+    <div className="p-8">
+      {/* Page Header */}
+      <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               Kelompok Tani
@@ -85,7 +79,6 @@ export default function KelompokTaniPage() {
             </p>
           </div>
         )}
-      </main>
     </div>
   );
 }
