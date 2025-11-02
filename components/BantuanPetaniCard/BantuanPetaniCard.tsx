@@ -39,11 +39,13 @@ export function BantuanPetaniCard({ data, onDelete }: BantuanPetaniCardProps) {
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-4">
-      <div className="flex items-center justify-between gap-4">
+      {/* Mobile: Vertical layout, Desktop: Horizontal layout */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
         {/* Left side - Title & Type */}
-        <div className="w-64 shrink-0">
-          <h3 className="text-sm font-semibold text-gray-900">{data.title}</h3>
-          <div className="mt-2 flex items-center gap-2">
+        <div className="min-w-0 flex-1">
+          <h3 className="text-sm font-semibold text-gray-900 break-words">{data.title}</h3>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
             <span
               className={`inline-block px-2 py-1 text-xs font-medium rounded ${
                 statusStyles[data.status] || 'bg-gray-100 text-gray-700'
@@ -57,17 +59,17 @@ export function BantuanPetaniCard({ data, onDelete }: BantuanPetaniCardProps) {
           </div>
         </div>
 
-        {/* Middle - Info */}
-        <div className="flex flex-1 items-center gap-6">
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-500">Pemberi Bantuan:</span>
-            <span className="text-xs font-medium text-gray-700">
+        {/* Middle - Info: Grid on mobile, Flex row on desktop */}
+        <div className="grid grid-cols-2 md:flex md:items-center gap-3 md:gap-0">
+          <div className="md:w-40 md:px-3">
+            <p className="text-xs text-gray-500">Pemberi Bantuan</p>
+            <p className="text-xs font-medium text-gray-700 break-words">
               {data.provider}
-            </span>
+            </p>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-500">Periode:</span>
-            <span className="text-xs font-medium text-gray-700">
+          <div className="md:w-32 md:px-3">
+            <p className="text-xs text-gray-500">Periode</p>
+            <p className="text-xs font-medium text-gray-700 whitespace-nowrap">
               {new Date(data.startDate).toLocaleDateString('id-ID', {
                 month: 'short',
                 year: '2-digit',
@@ -77,18 +79,18 @@ export function BantuanPetaniCard({ data, onDelete }: BantuanPetaniCardProps) {
                 month: 'short',
                 year: '2-digit',
               })}
-            </span>
+            </p>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-500">Kontak:</span>
-            <span className="text-xs font-medium text-gray-700">
+          <div className="col-span-2 md:col-span-1 md:w-32 md:px-3">
+            <p className="text-xs text-gray-500">Kontak</p>
+            <p className="text-xs font-medium text-gray-700 whitespace-nowrap">
               {data.phone}
-            </span>
+            </p>
           </div>
         </div>
 
         {/* Right side - Actions */}
-        <div className="flex flex-shrink-0 items-center gap-2">
+        <div className="flex items-center justify-end gap-2 md:flex-shrink-0">
           <Link
             href={`/bantuan-petani/${data.id}`}
             className="rounded-lg p-2 text-blue-600 transition-colors hover:bg-blue-50"
