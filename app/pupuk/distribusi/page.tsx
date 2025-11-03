@@ -40,20 +40,20 @@ export default function PupukDistributionPage() {
   );
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-6 lg:p-8">
       {/* Page Title */}
-      <div className="mb-8">
-          <div className="mb-8 flex items-center justify-between">
-            <div>
-              <h1 className="mb-2 text-3xl font-bold text-gray-900">Distribusi Pupuk</h1>
-              <p className="text-gray-600">Pantau distribusi pupuk dari pusat ke kelompok tani dan petani individual</p>
+      <div className="mb-6 md:mb-8">
+          <div className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div className="min-w-0">
+              <h1 className="mb-1 md:mb-2 text-2xl md:text-3xl font-bold text-gray-900 break-words">Distribusi Pupuk</h1>
+              <p className="text-sm md:text-base text-gray-600">Pantau distribusi pupuk dari pusat ke kelompok tani dan petani individual</p>
             </div>
             <Link
               href="/pupuk/distribusi/create"
-              className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white transition-colors hover:bg-green-700"
+              className="flex items-center justify-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white transition-colors hover:bg-green-700 whitespace-nowrap md:flex-shrink-0"
             >
-              <PlusIcon className="h-5 w-5" />
-              Tambah Distribusi
+              <PlusIcon className="h-4 md:h-5 w-4 md:w-5" />
+              <span className="text-sm md:text-base">Tambah Distribusi</span>
             </Link>
           </div>
         </div>
@@ -96,14 +96,14 @@ export default function PupukDistributionPage() {
 
         {/* Search and Filters */}
         <div className="mb-6 space-y-4">
-          <div className="relative">
-            <SearchIcon className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+          <div className="relative max-w-full sm:max-w-md">
+            <SearchIcon className="absolute left-3 top-1/2 h-4 md:h-5 w-4 md:w-5 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
               placeholder="Cari pupuk, kelompok tani, atau petani..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500"
+              className="w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2 text-sm md:text-base focus:border-transparent focus:ring-2 focus:ring-green-500"
             />
           </div>
 
@@ -135,14 +135,14 @@ export default function PupukDistributionPage() {
 
         {/* List */}
         {sortedList.length > 0 ? (
-          <div className="space-y-3">
+          <div className="space-y-2 md:space-y-3">
             {sortedList.map((distribution) => (
               <PupukDistributionCard key={distribution.id} data={distribution} />
             ))}
           </div>
         ) : (
-          <div className="rounded-xl border border-gray-200 bg-white p-12 text-center">
-            <p className="text-gray-500">
+          <div className="rounded-lg md:rounded-xl border border-gray-200 bg-white p-6 md:p-12 text-center">
+            <p className="text-sm md:text-base text-gray-500">
               {searchQuery || statusFilter
                 ? 'Tidak ada distribusi yang sesuai dengan pencarian'
                 : 'Belum ada data distribusi'}
