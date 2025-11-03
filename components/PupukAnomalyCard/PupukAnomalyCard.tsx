@@ -63,13 +63,13 @@ export function PupukAnomalyCard({ data, onStatusChange }: PupukAnomalyCardProps
               {new Date(data.detectedAt).toLocaleDateString('id-ID')}
             </p>
           </div>
-          {data.pupukName && (
-            <div className="md:w-32 md:px-3">
-              <p className="text-xs text-gray-500">Pupuk</p>
-              <p className="text-xs font-medium text-gray-700 break-words">{data.pupukName}</p>
-            </div>
-          )}
-          <div className={data.pupukName ? '' : 'col-span-2 md:col-span-1'}>
+          <div className="md:w-36 md:px-3">
+            <p className="text-xs text-gray-500">Pupuk</p>
+            <p className="text-xs font-medium text-gray-700 break-words">
+              {data.pupukName || '-'}
+            </p>
+          </div>
+          <div className="md:w-32 md:px-3">
             <p className="text-xs text-gray-500">Keparahan</p>
             <span className={`text-xs font-medium rounded px-2 py-0.5 inline-block ${severity.color}`}>
               {severity.label}
