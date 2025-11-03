@@ -77,11 +77,11 @@ export default function PupukAnomalyPage() {
   );
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-6 lg:p-8">
       {/* Page Title */}
-      <div className="mb-8">
-          <h1 className="mb-2 text-3xl font-bold text-gray-900">Deteksi Anomali Pupuk</h1>
-          <p className="text-gray-600">Monitor anomali seperti overstock, understock, pengiriman terlambat, dan laporan terlambat</p>
+      <div className="mb-6 md:mb-8">
+          <h1 className="mb-1 md:mb-2 text-2xl md:text-3xl font-bold text-gray-900 break-words">Deteksi Anomali Pupuk</h1>
+          <p className="text-sm md:text-base text-gray-600">Monitor anomali seperti overstock, understock, pengiriman terlambat, dan laporan terlambat</p>
         </div>
 
         {/* Stats Grid */}
@@ -122,11 +122,11 @@ export default function PupukAnomalyPage() {
 
         {/* Priority Alert */}
         {highSeverity.length > 0 && (
-          <div className="mb-8 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4">
-            <AlertTriangleIcon className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-600" />
-            <div>
-              <h3 className="mb-1 font-semibold text-red-900">⚠️ {highSeverity.length} Anomali Prioritas Tinggi</h3>
-              <p className="text-sm text-red-700">Memerlukan tindakan segera dari penyuluh dan pengelola stok.</p>
+          <div className="mb-8 flex items-start gap-3 rounded-lg md:rounded-xl border border-red-200 bg-red-50 p-3 md:p-4">
+            <AlertTriangleIcon className="mt-0.5 h-4 md:h-5 w-4 md:w-5 flex-shrink-0 text-red-600" />
+            <div className="min-w-0">
+              <h3 className="mb-1 font-semibold text-red-900 text-sm md:text-base break-words">⚠️ {highSeverity.length} Anomali Prioritas Tinggi</h3>
+              <p className="text-xs md:text-sm text-red-700">Memerlukan tindakan segera dari penyuluh dan pengelola stok.</p>
             </div>
           </div>
         )}
@@ -134,9 +134,9 @@ export default function PupukAnomalyPage() {
         {/* Summary Statistics */}
         <div className="mb-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* Anomalies by Region */}
-          <div className="rounded-xl border border-gray-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900">
-              <BarChart3Icon className="h-5 w-5" />
+          <div className="rounded-lg md:rounded-xl border border-gray-200 bg-white p-4 md:p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-base md:text-lg font-semibold text-gray-900">
+              <BarChart3Icon className="h-4 md:h-5 w-4 md:w-5" />
               Anomali per Wilayah
             </h2>
             <div className="space-y-3">
@@ -162,9 +162,9 @@ export default function PupukAnomalyPage() {
           </div>
 
           {/* Anomalies by Type */}
-          <div className="rounded-xl border border-gray-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900">
-              <BarChart3Icon className="h-5 w-5" />
+          <div className="rounded-lg md:rounded-xl border border-gray-200 bg-white p-4 md:p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-base md:text-lg font-semibold text-gray-900">
+              <BarChart3Icon className="h-4 md:h-5 w-4 md:w-5" />
               Anomali per Jenis
             </h2>
             <div className="space-y-3">
@@ -192,27 +192,27 @@ export default function PupukAnomalyPage() {
 
         {/* Search and Filters */}
         <div className="mb-6 space-y-4">
-          <div className="relative">
-            <SearchIcon className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+          <div className="relative max-w-full sm:max-w-md">
+            <SearchIcon className="absolute left-3 top-1/2 h-4 md:h-5 w-4 md:w-5 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
               placeholder="Cari anomali berdasarkan deskripsi, wilayah, atau pupuk..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500"
+              className="w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2 text-sm md:text-base focus:border-transparent focus:ring-2 focus:ring-green-500"
             />
           </div>
 
           {/* Filters */}
           <div className="flex flex-wrap items-center gap-2">
-            <FilterIcon className="h-4 w-4 text-gray-500" />
-            <span className="text-sm text-gray-600">Filter:</span>
+            <FilterIcon className="h-3 md:h-4 w-3 md:w-4 text-gray-500" />
+            <span className="text-xs md:text-sm text-gray-600">Filter:</span>
 
             {/* Type Filter */}
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              className="rounded-full border border-gray-300 px-3 py-1 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
+              className="rounded-full border border-gray-300 px-3 py-1 text-xs md:text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
             >
               <option value="">Semua Jenis</option>
               {ANOMALY_TYPE_OPTIONS.map((option) => (
@@ -226,7 +226,7 @@ export default function PupukAnomalyPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="rounded-full border border-gray-300 px-3 py-1 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
+              className="rounded-full border border-gray-300 px-3 py-1 text-xs md:text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
             >
               <option value="">Semua Status</option>
               {ANOMALY_STATUS_OPTIONS.map((option) => (
@@ -240,7 +240,7 @@ export default function PupukAnomalyPage() {
             <select
               value={severityFilter}
               onChange={(e) => setSeverityFilter(e.target.value)}
-              className="rounded-full border border-gray-300 px-3 py-1 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
+              className="rounded-full border border-gray-300 px-3 py-1 text-xs md:text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
             >
               <option value="">Semua Tingkat Keparahan</option>
               {ANOMALY_SEVERITY_OPTIONS.map((option) => (
@@ -254,14 +254,14 @@ export default function PupukAnomalyPage() {
 
         {/* Anomaly List */}
         {sortedList.length > 0 ? (
-          <div className="space-y-3">
+          <div className="space-y-2 md:space-y-3">
             {sortedList.map((anomaly) => (
               <PupukAnomalyCard key={anomaly.id} data={anomaly} onStatusChange={handleStatusChange} />
             ))}
           </div>
         ) : (
-          <div className="rounded-xl border border-gray-200 bg-white p-12 text-center">
-            <p className="text-gray-500">
+          <div className="rounded-lg md:rounded-xl border border-gray-200 bg-white p-6 md:p-12 text-center">
+            <p className="text-sm md:text-base text-gray-500">
               {searchQuery || typeFilter || statusFilter || severityFilter
                 ? 'Tidak ada anomali yang sesuai dengan filter'
                 : 'Tidak ada anomali terdeteksi'}

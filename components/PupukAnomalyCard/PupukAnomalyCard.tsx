@@ -46,40 +46,40 @@ export function PupukAnomalyCard({ data, onStatusChange }: PupukAnomalyCardProps
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-4">
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         {/* Left side - Type & Severity */}
-        <div className="w-48 shrink-0">
-          <h3 className="text-sm font-semibold text-gray-900">{typeConfig[data.type]}</h3>
-          <p className="mt-0.5 text-xs text-gray-500">
+        <div className="min-w-0 flex-1">
+          <h3 className="text-sm font-semibold text-gray-900 break-words">{typeConfig[data.type]}</h3>
+          <p className="mt-0.5 text-xs text-gray-500 break-words">
             {data.kelompokTaniName} • {data.kecamatan}
           </p>
         </div>
 
-        {/* Middle - Info */}
-        <div className="flex flex-1 items-center gap-6">
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-500">Terdeteksi:</span>
-            <span className="text-xs font-medium text-gray-700">
+        {/* Middle - Info: Grid on mobile, Flex row on desktop */}
+        <div className="grid grid-cols-2 md:flex md:items-center gap-3 md:gap-0">
+          <div className="md:w-32 md:px-3">
+            <p className="text-xs text-gray-500">Terdeteksi</p>
+            <p className="text-xs font-medium text-gray-700 whitespace-nowrap">
               {new Date(data.detectedAt).toLocaleDateString('id-ID')}
-            </span>
+            </p>
           </div>
           {data.pupukName && (
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500">Pupuk:</span>
-              <span className="text-xs font-medium text-gray-700">{data.pupukName}</span>
+            <div className="md:w-32 md:px-3">
+              <p className="text-xs text-gray-500">Pupuk</p>
+              <p className="text-xs font-medium text-gray-700 break-words">{data.pupukName}</p>
             </div>
           )}
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-500">Keparahan:</span>
-            <span className={`text-xs font-medium rounded px-2 py-0.5 ${severity.color}`}>
+          <div className={data.pupukName ? '' : 'col-span-2 md:col-span-1'}>
+            <p className="text-xs text-gray-500">Keparahan</p>
+            <span className={`text-xs font-medium rounded px-2 py-0.5 inline-block ${severity.color}`}>
               {severity.label}
             </span>
           </div>
         </div>
 
         {/* Right side - Status & Actions */}
-        <div className="flex flex-shrink-0 items-center gap-2">
-          <span className="text-xs font-medium text-gray-700">
+        <div className="flex flex-wrap items-center justify-end gap-2 md:flex-shrink-0">
+          <span className="text-xs font-medium text-gray-700 basis-full md:basis-auto">
             {status.label}
           </span>
           {onStatusChange && data.status === 'open' && (

@@ -16,7 +16,8 @@
       "mcp__chrome-devtools__click",
       "mcp__chrome-devtools__take_snapshot",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "mcp__chrome-devtools__close_page"
     ],
     "deny": [],
     "ask": []
