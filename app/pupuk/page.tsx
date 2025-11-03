@@ -33,34 +33,34 @@ export default function PupukPage() {
   const pupukTypes = Array.from(new Set(PUPUK_LIST.map((p) => p.type)));
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-6 lg:p-8">
       {/* Page Header */}
-      <div className="mb-8 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Pupuk</h1>
-            <p className="text-gray-600">
+      <div className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div className="min-w-0">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1 md:mb-2 break-words">Pupuk</h1>
+            <p className="text-sm md:text-base text-gray-600">
               Kelola jenis pupuk dan monitor stok di setiap kelompok tani
             </p>
           </div>
           <Link
             href="/pupuk/create"
-            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors whitespace-nowrap md:flex-shrink-0"
           >
-            <PlusIcon className="w-5 h-5" />
-            Tambah Pupuk
+            <PlusIcon className="w-4 md:w-5 h-4 md:h-5" />
+            <span className="text-sm md:text-base">Tambah Pupuk</span>
           </Link>
         </div>
 
         {/* Search and Filters */}
         <div className="mb-6 space-y-4">
-          <div className="relative">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <div className="relative max-w-full sm:max-w-md">
+            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 md:w-5 h-4 md:h-5 text-gray-400" />
             <input
               type="text"
               placeholder="Cari nama, kode, atau komposisi pupuk..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 text-sm md:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             />
           </div>
 
@@ -94,14 +94,14 @@ export default function PupukPage() {
 
         {/* List */}
         {filteredList.length > 0 ? (
-          <div className="space-y-3">
+          <div className="space-y-2 md:space-y-3">
             {filteredList.map((pupuk) => (
               <PupukCard key={pupuk.id} data={pupuk} onDelete={handleDelete} />
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-            <p className="text-gray-500">
+          <div className="bg-white rounded-lg md:rounded-xl border border-gray-200 p-6 md:p-12 text-center">
+            <p className="text-sm md:text-base text-gray-500">
               {searchQuery || filterType
                 ? 'Tidak ada pupuk yang sesuai dengan pencarian'
                 : 'Belum ada data pupuk'}
