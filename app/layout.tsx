@@ -3,9 +3,9 @@
 import 'styles/tailwind.css';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
-import { SidebarProvider } from 'components/Sidebar/SidebarContext';
-import { Sidebar } from 'components/Sidebar';
 import { Header } from 'components/Header';
+import { Sidebar } from 'components/Sidebar';
+import { SidebarProvider } from 'components/Sidebar/SidebarContext';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
