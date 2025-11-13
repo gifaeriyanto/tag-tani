@@ -1,11 +1,11 @@
-'use client';
+"use client"
 
-import 'styles/tailwind.css';
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-draw/dist/leaflet.draw.css';
-import { Header } from 'components/Header';
-import { Sidebar } from 'components/Sidebar';
-import { SidebarProvider } from 'components/Sidebar/SidebarContext';
+import "styles/tailwind.css"
+import "leaflet/dist/leaflet.css"
+import "leaflet-draw/dist/leaflet.draw.css"
+import { Header } from "components/Header"
+import { Sidebar } from "components/Sidebar"
+import { SidebarProvider } from "components/Sidebar/SidebarContext"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -14,11 +14,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SidebarProvider>
           <Sidebar />
           <Header />
-          <main className="mt-16 lg:ml-[220px] min-h-screen">
-            {children}
-          </main>
+          <main className="mt-16 min-h-[calc(100vh-64px)] lg:ml-[220px]">{children}</main>
         </SidebarProvider>
       </body>
     </html>
-  );
+  )
 }

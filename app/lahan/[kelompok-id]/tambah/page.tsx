@@ -41,12 +41,9 @@ export default function TambahLahanPage() {
   }
 
   return (
-    <div className="relative">
-      {/* Full-screen Map */}
-      <LahanDrawMap onCoordinatesChange={handleCoordinatesChange} initialCoordinates={coordinates} />
-
+    <div className="flex h-[calc(100vh-64px)] flex-col">
       {/* Header Bar */}
-      <div className="absolute top-0 right-0 left-0 z-[1001] border-b border-gray-200 bg-white shadow-sm">
+      <div className="shrink-0 border-b border-gray-200 bg-white shadow-sm">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
@@ -68,11 +65,30 @@ export default function TambahLahanPage() {
         </div>
       </div>
 
+      {/* Map Container */}
+      <div className="relative flex-1 overflow-hidden">
+        <LahanDrawMap onCoordinatesChange={handleCoordinatesChange} initialCoordinates={coordinates} />
+
+        {/* Show Form Button (when form is hidden) */}
+        {!showForm && coordinates.length >= 3 && (
+          <button
+            onClick={() => setShowForm(true)}
+            className="absolute right-4 bottom-32 z-[1001] flex items-center gap-2 rounded-lg bg-green-600 px-4 py-3 font-medium text-white shadow-lg hover:bg-green-700"
+          >
+            <SaveIcon className="h-5 w-5" />
+            Isi Detail Lahan
+          </button>
+        )}
+      </div>
+
       {/* Floating Form */}
       {showForm && coordinates.length >= 3 && (
         <>
           {/* Backdrop */}
-          <div className="fixed inset-0 z-[1001] flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }}>
+          <div
+            className="fixed inset-0 z-[1001] flex items-center justify-center p-4"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.4)" }}
+          >
             {/* Form Card */}
             <div className="flex max-h-[90vh] w-full max-w-2xl flex-col rounded-2xl bg-white shadow-2xl">
               {/* Header */}
@@ -102,17 +118,6 @@ export default function TambahLahanPage() {
             </div>
           </div>
         </>
-      )}
-
-      {/* Show Form Button (when form is hidden) */}
-      {!showForm && coordinates.length >= 3 && (
-        <button
-          onClick={() => setShowForm(true)}
-          className="absolute right-4 bottom-24 z-[1001] flex items-center gap-2 rounded-lg bg-green-600 px-4 py-3 font-medium text-white shadow-lg hover:bg-green-700"
-        >
-          <SaveIcon className="h-5 w-5" />
-          Isi Detail Lahan
-        </button>
       )}
     </div>
   )

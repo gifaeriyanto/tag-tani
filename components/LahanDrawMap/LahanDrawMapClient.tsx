@@ -180,7 +180,7 @@ export function LahanDrawMapClient({
   const defaultCenter: [number, number] = initialCoordinates?.[0] || [-4.0, 120.0];
 
   return (
-    <div className="h-screen w-screen fixed inset-0 z-50 bg-white">
+    <div className="h-full w-full bg-white">
       <MapContainer
         center={defaultCenter}
         zoom={15}
